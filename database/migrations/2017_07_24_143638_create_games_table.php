@@ -15,6 +15,11 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
+            // verweis auf andere Tabell? Foreign-Key?
+            $table->string('playerOne');
+            $table->string('playerTwo');
+            $table->string('field');
+            $table->time('period');
             $table->timestamps();
         });
     }
