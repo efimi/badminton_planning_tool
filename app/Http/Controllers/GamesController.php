@@ -23,10 +23,10 @@ class GamesController extends Controller
                              g.time 
                              
                             FROM games AS g 
-                            JOIN players AS p on g.firstPlayerId=p.id 
-                            JOIN players AS p2 on g.secondPlayerId=p2.id
-                            JOIN fields AS f on g.fieldId=f.id
-                            WHERE date=CURRENT_DATE order by fieldId ASC, time ASC');
+                            JOIN players AS p on g.first_player_id=p.id 
+                            JOIN players AS p2 on g.second_player_id=p2.id
+                            JOIN fields AS f on g.field_id=f.id
+                            WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
 
       return view('games.show', compact('games'));
     }

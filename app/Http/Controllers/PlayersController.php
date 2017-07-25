@@ -23,11 +23,11 @@ class PlayersController extends Controller
                                     p2.lastname as Secondname 
                                 from
                                     games AS g 
-                                    JOIN players AS p ON p.id=g.firstPlayerId
-                                    JOIN players AS p2 ON p2.id=g.SecondPlayerId
+                                    JOIN players AS p ON p.id=g.first_player_pd
+                                    JOIN players AS p2 ON p2.id=g.Second_player_id
                                 where
-                                 g.firstPlayerId='.$id.' 
-                                 OR g.secondPlayerId='.$id.' 
+                                 g.first_player_id='.$id.' 
+                                 OR g.second_player_id='.$id.' 
                                  ORDER BY date DESC, time ASC');
 
 
