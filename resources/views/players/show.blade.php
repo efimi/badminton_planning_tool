@@ -9,6 +9,12 @@
         </thead>
         @endforeach
         <tbody>
+            <tr>
+                <th>Datum</th>
+                <th>Uhrzeit</th>
+                <th>Spieler 1</th>
+                <th>Spieler 2</th>
+            </tr>
         @foreach($game as $game)
             <tr>
                 <td>  {{ $game->Date  }}  </td>
