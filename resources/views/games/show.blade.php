@@ -21,6 +21,11 @@
                         <td>{{$game->field}}</td>
                 <?php } ?>
                         <td> {{ $game->firstPlayer }} <br> {{ $game->secondPlayer }}</td>
+                <?php /*if($currentfield)
+                {
+
+                }*/
+                ?>
 
             @endforeach
       </tbody>
