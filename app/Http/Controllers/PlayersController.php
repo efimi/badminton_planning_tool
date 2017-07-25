@@ -9,7 +9,7 @@ class PlayersController extends Controller
     //
     public function index()
     {
-      return view('palyers.index');
+      return view('players.index');
     }
     public function show()
     {
