@@ -13,7 +13,10 @@ class GamesController extends Controller
     }
     public function show()
     {
-      return view('games.show');
+
+      $games = DB::table('game')->get();
+
+      return view('games.show', compact('games'));
     }
 
     public function create()
