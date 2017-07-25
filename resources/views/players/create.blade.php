@@ -2,7 +2,7 @@
 
 @section('content')
   <h1>Spieler erstellen</h1>
-  <form>
+  <form method="POST" action="/spieler" >
     {{csrf_field() }}
     <div class="form-group">
       <label for="firstname">Vorname: </label>
@@ -20,3 +20,14 @@
 <hr>
 
 @endsection
+
+
+{{--
+GET /spieler
+GET /spieler/create
+POST /spieler     // erstelle eine Spielfeld
+GET /spieler/{id}        // zeige an
+PATCH /spieler/{id}     // edit Spielfeld mit der id
+DELETE /spieler/{id}
+
+--}}

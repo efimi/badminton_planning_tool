@@ -20,7 +20,10 @@
 
 {{--
 GET /spielfeld
-
-
+GET /spielfeld/create
+POST /spielfeld     // erstelle eine Spielfeld
+GET /spielfeld/{id}        // zeige an
+PATCH /spielfeld/{id}     // edit Spielfeld mit der id
+DELETE /spielfeld/{id}
 
 --}}
