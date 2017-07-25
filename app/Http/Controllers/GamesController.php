@@ -11,8 +11,8 @@ class GamesController extends Controller
     {
       return view('games.index');
     }
-    public function show()
-    {
-      return view('games.show');
-    }
+    // public function show()
+    // {
+    //   return view('games.show');
+    // }
 }
