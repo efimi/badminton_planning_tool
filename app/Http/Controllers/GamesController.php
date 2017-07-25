@@ -25,7 +25,7 @@ class GamesController extends Controller
                             FROM games AS g 
                             JOIN players AS p on g.firstPlayerId=p.id 
                             JOIN players AS p2 on g.secondPlayerId=p2.id
-                            JOIN field AS f on g.fieldId=f.id
+                            JOIN fields AS f on g.fieldId=f.id
                             WHERE date=CURRENT_DATE order by fieldId ASC, time ASC');
 
       return view('games.show', compact('games'));
