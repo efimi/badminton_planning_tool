@@ -16,7 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             // $table->primary('id');
-            // verweis auf andere Tabell? Foreign-Key?
+
             $table->integer('first_player_id')->unsigned();
 
             $table->integer('second_player_id')->unsigned();
@@ -28,6 +28,7 @@ class CreateGamesTable extends Migration
 
 
         });
+          // verweis auf andere Tabell? Foreign-Key?
         Schema::table('games', function (Blueprint $table) {
           $table->foreign('first_player_id')->references('id')->on('players');
           $table->foreign('second_player_id')->references('id')->on('players');

@@ -15,8 +15,7 @@ class CreateFieldsTable extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->increments('id');
-            // $table->primary('id');
-            $table->string('name');
+            $table->string('fieldname');
         });
     }
 
