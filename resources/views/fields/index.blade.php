@@ -1,5 +1,5 @@
 @extends('layout')
 
-@section('field')
+@section('content')
 
 @endsection

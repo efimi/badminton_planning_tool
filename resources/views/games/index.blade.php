@@ -1,5 +1,5 @@
 @extends('layout')
 
-@section('game')
+@section('content')
 
 @endsection
