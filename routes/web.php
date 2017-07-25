@@ -24,11 +24,12 @@ Route::get('/spieler/{player}', 'PlayersController@show');
 Route::post('/spieler','PlayersController@store');
 
 // Route::get('/spielfeld', 'FieldsController@index');
+Route::post('/spielfeld','FieldsController@store');
 Route::get('/spielfeld/erstellen', 'FieldsController@create');
 Route::get('/spielfeld/{field}', 'FieldsController@show');
 
 // für erstellen von neuen Spielfeldern
-Route::post('/spielfeld','FieldsController@store');
+
 
 
 
