@@ -5,11 +5,11 @@
 <form>
   <div class="form-group">
     <label for="user">Nutzer: </label>
-    <input type="text" class="form-control" id="user" placeholder="Benutzername">
+    <input type="text" class="form-control" id="user" placeholder="user">
   </div>
   <div class="form-group">
     <label for="password">Passwort: </label>
-    <input type="text" class="form-control" id="password" placeholder="Passwort">
+    <input type="text" class="form-control" id="password" placeholder="password">
   </div>
 </form>
 
