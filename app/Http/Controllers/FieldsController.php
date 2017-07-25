@@ -19,4 +19,14 @@ class FieldsController extends Controller
     {
       return view('fields.create');
     }
+    public function store()
+    {
+      dd(request()->all());
+      
+      // create a new Field using the request data
+      // Save it to the Database
+      // And then redirect to the homepage.
+
+
+    }
 }

@@ -1,7 +1,9 @@
 @extends('layout')
 
 @section('content')
+<form method="POST" action="/spiel" >
 
+</form>
 <h1>Ein Spiel hinterlegen</h1>
 
 @endsection
