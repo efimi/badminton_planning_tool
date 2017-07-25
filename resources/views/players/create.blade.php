@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="name">Name: </label>
       <input class="form-control" id="name" >
-      <smallclass="form-text text-muted">Tragen sie hier den Namen des Spielers ein.</small>
+      <small class="form-text text-muted">Tragen sie hier den Namen des Spielers ein.</small>
     </div>
 
 

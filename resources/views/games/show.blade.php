@@ -12,34 +12,17 @@
           </tr>
       </thead>
       <tbody>
+
             @foreach ($games as $game)
+                <?php if(!isset($currentField) || $currentField != $game->field ) {
+                    $currentField = $game->field;
+                    ?>
+                    <tr>
+                        <td>{{$game->field}}</td>
+                <?php } ?>
+                        <td> {{ $game->firstPlayer }} <br> {{ $game->secondPlayer }}</td>
 
             @endforeach
-            <tr>
-                <td>Spielfeld A</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-            </tr>
-            <tr>
-                <td>Spielfeld B</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-            </tr>
-            <tr>
-                <td>Spielfeld C</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-            </tr>
-            <tr>
-                <td>Spielfeld D</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-            </tr>
-
       </tbody>
   </table>
 
