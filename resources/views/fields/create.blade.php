@@ -5,8 +5,8 @@
   <form method="POST" action="/spielfeld">
     {{csrf_field() }}
     <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name">
+      <label for="fieldname">Name:</label>
+      <input type="text" class="form-control" id="fieldname" name="fieldname">
       {{-- <small class="form-text text-muted">Tragen sie hier den Namen des Spielfeldes ein.</small> --}}
     </div>
 

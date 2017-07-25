@@ -28,7 +28,7 @@ class FieldsController extends Controller
       // create a new Field using the request data
       $field = new \App\Field;
 
-      $field->name = request('name');
+      $field->fieldname = request('fieldname');
       // Save it to the Database
       $field->save();
 
