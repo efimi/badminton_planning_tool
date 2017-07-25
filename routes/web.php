@@ -14,6 +14,7 @@
 // nach / kommt die Seite like 'about'....
 // will den view welcome laden
 Route::get('/','GamesController@show');
+Route::get('/spiel/erstellen','GamesController@create');
 
 // auch möglich über einen PagesController..
 Route::get('/spieler', 'PlayersController@index');
@@ -22,6 +23,7 @@ Route::get('/spieler/{player}', 'PlayersController@show');
 
 // Route::get('/spielfeld', 'FieldsController@index');
 Route::get('/spielfeld/{field}', 'FieldsController@show');
+Route::get('/spielfeld/erstellen', 'FieldsController@create');
 
 
 
