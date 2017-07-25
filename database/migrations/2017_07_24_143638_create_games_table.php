@@ -25,6 +25,7 @@ class CreateGamesTable extends Migration
 
             $table->time('time');
             $table->date('date');
+            $table->timestamps();
 
 
         });
