@@ -13,13 +13,13 @@
 
 // nach / kommt die Seite like 'about'....
 // will den view welcome laden
-Route::get('/','GamesController@index');
+Route::get('/','GamesController@show');
 
 // auch möglich über einen PagesController..
 Route::get('/spieler', 'PlayersController@index');
 Route::get('/spieler/{player}', 'PlayersController@show');
 
-Route::get('/spielfeld', 'FieldsController@index');
+// Route::get('/spielfeld', 'FieldsController@index');
 Route::get('/spielfeld/{field}', 'FieldsController@show');
 
 
