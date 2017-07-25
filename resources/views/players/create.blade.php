@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('content')
-  <h1>Spielfeld erstellen</h1>
+  <h1>Spieler erstellen</h1>
   <form>
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="name">Name: </label>
       <input class="form-control" id="name" >
-      <smallclass="form-text text-muted">Tragen sie hier den Namen des Spielfeldes ein.</small>
+      <smallclass="form-text text-muted">Tragen sie hier den Namen des Spielers ein.</small>
     </div>
 
 
