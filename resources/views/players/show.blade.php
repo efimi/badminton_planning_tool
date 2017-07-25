@@ -12,6 +12,7 @@
             <tr>
                 <th>Datum</th>
                 <th>Uhrzeit</th>
+                <th>Spielfeld</th>
                 <th>Spieler 1</th>
                 <th>Spieler 2</th>
             </tr>
@@ -19,6 +20,7 @@
             <tr>
                 <td>  {{ $game->Date  }}  </td>
                 <td>  {{ $game->Time  }}  </td>
+                <td>  {{ $game->Field  }}  </td>
                 <td>  {{ $game->Firstname  }}  </td>
                 <td>  {{ $game->Secondname  }}  </td>
             </tr>
