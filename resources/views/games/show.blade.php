@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+    <h1> {{ date("d.m.Y") }} </h1>
   <table class="table">
       <thead>
           <tr>
@@ -16,16 +16,12 @@
             @foreach ($games as $game)
                 <?php if(!isset($currentField) || $currentField != $game->field ) {
                     $currentField = $game->field;
+
                     ?>
                     <tr>
                         <td>{{$game->field}}</td>
                 <?php } ?>
                         <td> {{ $game->firstPlayer }} <br> {{ $game->secondPlayer }}</td>
-                <?php /*if($currentfield)
-                {
-
-                }*/
-                ?>
 
             @endforeach
       </tbody>

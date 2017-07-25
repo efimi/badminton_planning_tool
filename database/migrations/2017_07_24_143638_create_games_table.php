@@ -18,11 +18,11 @@ class CreateGamesTable extends Migration
             // $table->primary('id');
             // verweis auf andere Tabell? Foreign-Key?
             $table->integer('firstPlayerId');
-            $table->foreign('firstPlayerId')->references('id')->on('players');
+            //$table->foreign('firstPlayerId')->references('id')->on('players');
             $table->integer('secondPlayerId');
-            $table->foreign('secondPlayerId')->references('id')->on('players');
+            //$table->foreign('secondPlayerId')->references('id')->on('players');
             $table->integer('fieldId');
-            $table->foreign('fieldId')->references('id')->on('fields');
+            //$table->foreign('fieldId')->references('id')->on('fields');
             $table->time('time');
             $table->date('date');
         });
