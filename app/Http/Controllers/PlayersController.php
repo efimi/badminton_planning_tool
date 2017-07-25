@@ -20,11 +20,13 @@ class PlayersController extends Controller
                                     g.date as Date,
                                     g.time as Time,
                                     p.lastname as Firstname,
-                                    p2.lastname as Secondname
+                                    p2.lastname as Secondname,
+                                    f.fieldname as Field
                                 from
                                     games AS g
                                     JOIN players AS p ON p.id=g.first_player_id
                                     JOIN players AS p2 ON p2.id=g.second_player_id
+                                    JOIN fields AS f ON f.id=g.field_id
                                 where
                                  g.first_player_id='.$id.'
                                  OR g.second_player_id='.$id.'
