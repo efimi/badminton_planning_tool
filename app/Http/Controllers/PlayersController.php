@@ -16,20 +16,18 @@ class PlayersController extends Controller
     public function show($id)
     {
         $player = \DB::SELECT('SELECT * from players where id='.$id);
-        $game = \DB::SELECT('SELECT 
+        $game = \DB::SELECT('SELECT
                                     g.date as Date,
                                     g.time as Time,
                                     p.lastname as Firstname,
-                                    p2.lastname as Secondname, 
-                                    f.fieldname as Field
+                                    p2.lastname as Secondname
                                 from
-                                    games AS g 
+                                    games AS g
                                     JOIN players AS p ON p.id=g.first_player_id
-                                    JOIN players AS p2 ON p2.id=g.Second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id
+                                    JOIN players AS p2 ON p2.id=g.second_player_id
                                 where
-                                 g.first_player_id='.$id.' 
-                                 OR g.second_player_id='.$id.' 
+                                 g.first_player_id='.$id.'
+                                 OR g.second_player_id='.$id.'
                                  ORDER BY date DESC, time ASC');
 
 
