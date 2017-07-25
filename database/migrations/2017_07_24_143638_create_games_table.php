@@ -17,15 +17,23 @@ class CreateGamesTable extends Migration
             $table->increments('id');
             // $table->primary('id');
             // verweis auf andere Tabell? Foreign-Key?
-            $table->integer('firstPlayerId');
-            //$table->foreign('firstPlayerId')->references('id')->on('players');
-            $table->integer('secondPlayerId');
-            //$table->foreign('secondPlayerId')->references('id')->on('players');
-            $table->integer('fieldId');
-            //$table->foreign('fieldId')->references('id')->on('fields');
+            $table->integer('first_player_id')->unsigned();
+
+            $table->integer('second_player_id')->unsigned();
+
+            $table->integer('field_id')->unsigned();
+
             $table->time('time');
             $table->date('date');
+
+
         });
+        Schema::table('games', function (Blueprint $table) {
+          $table->foreign('first_player_id')->references('id')->on('players');
+          $table->foreign('second_player_id')->references('id')->on('players');
+          $table->foreign('field_id')->references('id')->on('fields');
+        });
+
     }
 
     /**
