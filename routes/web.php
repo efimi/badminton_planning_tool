@@ -22,8 +22,9 @@ Route::get('/spieler/erstellen', 'PlayersController@create');
 Route::get('/spieler/{player}', 'PlayersController@show');
 
 // Route::get('/spielfeld', 'FieldsController@index');
-Route::get('/spielfeld/{field}', 'FieldsController@show');
 Route::get('/spielfeld/erstellen', 'FieldsController@create');
+Route::get('/spielfeld/{field}', 'FieldsController@show');
+
 
 
 

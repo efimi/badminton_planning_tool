@@ -5,19 +5,29 @@
   <table class="table">
       <thead>
           <tr>
-              <td>09:00-11:00</td>
-              <td>11:00-13:00</td>
-              <td>13:00-15:00</td>
+              <th>Spielfelder</th>
+              <th>09:00-11:00</th>
+              <th>11:00-13:00</th>
+              <th>13:00-15:00</th>
           </tr>
       </thead>
       <tbody>
 
-            <tr>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-                <td> Firstplayer <br> Lastplayer</td>
-            </tr>
+            @foreach ($games as $game)
+                <?php if(!isset($currentField) || $currentField != $game->field ) {
+                    $currentField = $game->field;
+                    ?>
+                    <tr>
+                        <td>{{$game->field}}</td>
+                <?php } ?>
+                        <td> {{ $game->firstPlayer }} <br> {{ $game->secondPlayer }}</td>
+                <?php /*if($currentfield)
+                {
 
+                }*/
+                ?>
+
+            @endforeach
       </tbody>
   </table>
 
