@@ -15,4 +15,8 @@ class PlayersController extends Controller
     {
       return view('players.show');
     }
+    public function create()
+    {
+      return view('players.create');
+    }
 }

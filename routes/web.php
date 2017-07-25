@@ -17,6 +17,7 @@ Route::get('/','GamesController@index');
 
 // auch möglich über einen PagesController..
 Route::get('/spieler', 'PlayersController@index');
+Route::get('/spieler/erstellen', 'PlayersController@create');
 Route::get('/spieler/{player}', 'PlayersController@show');
 
 Route::get('/spielfeld', 'FieldsController@index');

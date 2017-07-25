@@ -15,4 +15,8 @@ class FieldsController extends Controller
     {
       return view('fields.show');
     }
+    public function create()
+    {
+      return view('fields.create');
+    }
 }

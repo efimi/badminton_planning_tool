@@ -15,4 +15,9 @@ class GamesController extends Controller
     // {
     //   return view('games.show');
     // }
+
+    public function create()
+    {
+      return view('games.create');
+    }
 }
