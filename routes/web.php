@@ -14,7 +14,7 @@
 // nach / kommt die Seite like 'about'....
 // will den view welcome laden
 Route::get('/', function () {
-    return view('layout');
+    return view('games.show');
 });
 
 // auch möglich über einen PagesController..
