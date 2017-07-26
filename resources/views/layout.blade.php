@@ -22,22 +22,22 @@
   <body>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-4" style="margin:auto;">
+  <div class="col-md-8" style="margin:auto;">
     <div class="row">
-      <div class="col-md-8">
+      <div class="@if(Auth::guest()) col-md-12  @else col-md-8 @endif">
         @include('layouts.nav')
 
           @yield('content')
 
         @include('layouts.footer')
       </div>
-      <div class="col-md-4">
+
         @if(isset(Auth::user()->name ) )
-
+          <div class="col-md-4">
             @include('layouts.sidebar')
-
+          </div>
         @endif
-      </div>
+
     </div>
 
   </div>
