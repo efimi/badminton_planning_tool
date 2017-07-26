@@ -9,6 +9,7 @@
             <th> Feld </th>
             <th> Datum </th>
             <th> Zeit </th>
+            <th> Optionen </th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td> {{ $data->Field }} </td>
                 <td> {{ $data->Date }} </td>
                 <td> {{ $data->Time }} </td>
+                <td> <a href="bearbeiten/{{ $data->id }}">Bearbeiten</a> | <a href="löschen/{{ $data->id }}">Löschen</a> </td>
             </tr>
         @endforeach
         </tbody>

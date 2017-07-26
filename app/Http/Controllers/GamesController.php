@@ -15,7 +15,8 @@ class GamesController extends Controller
 
     public function index()
     {
-        $Gdata = \DB::Select('SELECT                                
+        $Gdata = \DB::Select('SELECT 
+                                    g.id AS id,
                                     p.lastname as Firstname,
                                     p2.lastname as Secondname,
                                     f.fieldname as Field,
@@ -112,6 +113,20 @@ class GamesController extends Controller
         $Fdata = \DB::Select('SELECT * FROM fields');
         $Gdata = \DB::Select('SELECT * FROM games WHERE id="'.$id.'"');
 
-        return view('games.edit', compact('Pdata', 'Fdata', 'Gdata'));
+        return view('games.edit', compact('Pdata', 'Gdata', 'Fdata'));
+    }
+
+    public function update(Request $request)
+    {
+
+        $data = [
+            'first_player_id' => request('first_player_id'),
+            'second_player_id' => request('second_player_id'),
+            'field_id' => request('field'),
+            'time' => request('time')
+        ];
+
+        $games = \DB::Select('SELECT * FROM games ');
+        return view('players.index', compact('games'));
     }
 }
