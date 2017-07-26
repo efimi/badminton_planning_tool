@@ -13,7 +13,11 @@
                 <tr>
                     <td> {{ $player->firstname }} </td>
                     <td> {{ $player->lastname }} </td>
-                    <td>  <a href="/spieler/{{ $player->id  }}"> Profil anzeigen </a></td>
+                    <td>  <a href="/spieler/{{ $player->id  }}"> Profil anzeigen </a>
+                    @if (!Auth::guest())
+                        | <a href="/spieler/bearbeiten/{{ $player->id }}">Bearbeiten</a>
+                    @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>
