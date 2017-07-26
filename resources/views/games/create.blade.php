@@ -43,20 +43,10 @@
 
     <button type="submit" class="btn btn-default">Erstellen</button>
 
+      @include('layouts.errors')
 </form>
 <br>
 
-{{--  show errors --}}
-<div class="form-group">
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li> {{ $error }}</li>
-
-      @endforeach
-    </ul>
-  </div>
-</div>
 
 @endsection
 

@@ -15,20 +15,15 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Spieler erstellen</button>
+
+    @include('layouts.errors')
+
   </form>
 
 <br>
 
-<div class="form-group">
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li> {{ $error }}</li>
+  {{--  show errors --}}
 
-      @endforeach
-    </ul>
-  </div>
-</div>
 
 @endsection
 
