@@ -14,13 +14,11 @@
         <tbody>
         @foreach($Gdata as $data)
             <tr>
-                <td> {{ $data->firstname }} </td>
-                <td> {{ $data->secondname }} </td>
-                <td>  <a href="/spieler/{{ $player->id  }}"> Profil anzeigen </a>
-                    @if (!Auth::guest())
-                        | <a href="/spieler/bearbeiten/{{ $player->id }}">Bearbeiten</a>
-                    @endif
-                </td>
+                <td> {{ $data->Firstname }} </td>
+                <td> {{ $data->Secondname }} </td>
+                <td> {{ $data->Field }} </td>
+                <td> {{ $data->Date }} </td>
+                <td> {{ $data->Time }} </td>
             </tr>
         @endforeach
         </tbody>
