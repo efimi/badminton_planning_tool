@@ -15,6 +15,7 @@
 // will den view welcome laden
 Route::get('/','GamesController@show');
 Route::get('/spiel/erstellen','GamesController@create');
+Route::get('/spiel/anzeigen','GamesController@index');
 Route::get('/spiel/bearbeiten/{id}','GamesController@edit');
 Route::post('/spiel','GamesController@store');
 

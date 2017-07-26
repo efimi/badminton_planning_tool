@@ -15,6 +15,18 @@ class GamesController extends Controller
 
     public function index()
     {
+        $Gdata = \DB::Select('SELECT                                
+                                    p.lastname as Firstname,
+                                    p2.lastname as Secondname,
+                                    f.fieldname as Field,
+                                    g.date as Date,
+                                    g.time as Time
+                                FROM
+                                    games AS g
+                                    JOIN players AS p ON p.id=g.first_player_id
+                                    JOIN players AS p2 ON p2.id=g.second_player_id
+                                    JOIN fields AS f ON f.id=g.field_id 
+                                    ');
       return view('games.index');
     }
     public function show()

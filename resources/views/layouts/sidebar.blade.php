@@ -7,7 +7,7 @@
             </div>
             <div class="list-group-item active">
                 <a class="list-group-item" href="/spiel/erstellen">Spiel erstellen</a>
-                <a class="list-group-item" href="/spiel/erstellen">Spiele anzeigen</a>
+                <a class="list-group-item" href="/spiel/anzeigen">Spiele anzeigen</a>
             </div>
             <div class="list-group-item active">
                 <a class="list-group-item" href="/spielfeld/erstellen">Spielfeld erstellen</a>

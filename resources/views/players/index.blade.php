@@ -6,6 +6,7 @@
             <tr>
                 <th> Vorname </th>
                 <th> Nachname </th>
+                <th> Optionen </th>
             </tr>
         </thead>
         <tbody>
