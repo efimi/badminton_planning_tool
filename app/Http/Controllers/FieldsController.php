@@ -9,12 +9,13 @@ class FieldsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => 'create']);
+        $this->middleware('auth');
     }
     //
     public function index()
     {
-      return view('fields.index');
+        $Fdata = \DB::Select('SELECT * FROM fields');
+        return view('fields.index', compact('Fdata'));
     }
     public function show()
     {
@@ -45,4 +46,25 @@ class FieldsController extends Controller
       return redirect('/');
 
     }
+    public function edit($id)
+    {
+        $Fdata = \DB::Select('SELECT * FROM fields WHERE id="'.$id.'"');
+        return view('fields.edit', compact('Fdata'));
+    }
+
+
+    public function update(Request $request)
+    {
+
+        if(request('fieldname') != ""){
+            $Fdata = \DB::Update('UPDATE fields SET fieldname = "'. request('fieldname') .'" WHERE id="'. request('id').'"');
+        }
+        $data = [
+            'fieldname' => request('fieldname'),
+            'id' => request('id')
+        ];
+
+        return view('fields.show', compact('data'));
+    }
+
 }

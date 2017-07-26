@@ -77,4 +77,28 @@ class PlayersController extends Controller
       return redirect('/');
 
     }
+    public function edit($id)
+    {
+        $Pdata = \DB::Select('SELECT * FROM players WHERE id="'.$id.'"');
+        return view('players.edit', compact('Pdata'));
+    }
+
+    public function update(Request $request)
+    {
+
+        if(request('firstname') != ""){
+            $Pdata = \DB::Update('UPDATE players SET firstname = "'. request('firstname') .'" WHERE id="'. request('id').'"');
+        }
+        if(request('lastname') != ""){
+            $Pdata = \DB::Update('UPDATE players SET lastname = "'. request('lastname') .'" WHERE id="'. request('id').'"');
+        }
+        $data = [
+            'fieldname' => request('fieldname'),
+            'id' => request('id')
+        ];
+
+        $players = \DB::Select('SELECT * FROM players ');
+        return view('players.index', compact('players'));
+    }
+
 }
