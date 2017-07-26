@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class PlayersController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'create']);
+    }
+
     //
     public function index()
     {

@@ -21,20 +21,27 @@
 
   <body>
 
+<div class="row">
+  <div class="col-md-9 col-md-offset-3">
+    <div class="row">
+      <div class="col-md-8">
+        @include('layouts.nav')
 
-  <div class="container">
+          @yield('content')
 
-      @include('layouts.nav')
+        @include('layouts.footer')
+      </div>
+      <div class="col-md-4">
+        @if(isset(Auth::user()->name ) )
 
+            @include('layouts.sidebar')
 
-      @yield('content')
+        @endif
+      </div>
+    </div>
 
-
-
-    @include('layouts.footer')
-
-    </div> <!-- /container -->
-
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </div>
+</div>
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

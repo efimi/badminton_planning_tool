@@ -11,25 +11,26 @@
       <a class="nav-link" href="/spieler">Spieler</a>
     </li>
 
-    {{--  nur bei Login anzeigen lassen --}}
-    <li class="nav-item">
-      <a class="nav-link" href="/spieler/erstellen">Spieler erstellen</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="/spielfeld/erstellen">Spielfeld erstellen</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="/spiel/erstellen">Spiel erstellen</a>
-    </li>
-
-
-
-
+    @if (Auth::guest())
     <li class="nav-item">
       <a class="nav-link" href="/login">Login</a>
     </li>
+    @else
+      <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                 document.getElementById('logout-form').submit();">
+              Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+          </li>
+    @endif
+
+
+
   </ul>
 </nav>
 <h3 class="text-muted">Badminton Planing Tool</h3>
