@@ -37,8 +37,12 @@ class PlayersController extends Controller
     }
     public function create()
     {
+
+
+
       return view('players.create');
     }
+
     public function store()
     {
       // create a new Field using the request data

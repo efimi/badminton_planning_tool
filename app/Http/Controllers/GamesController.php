@@ -31,8 +31,34 @@ class GamesController extends Controller
       return view('games.show', compact('games'));
     }
 
+
     public function create()
     {
-      return view('games.create');
+        $Pdata = \DB::Select('SELECT * FROM players');
+        $Fdata = \DB::Select('SELECT * FROM fields');
+      return view('games.create', compact('Pdata', 'Fdata'));
+    }
+    public function store()
+    {
+        // create a new Field using the request data
+        $game = new \App\Game;
+
+        if(request('first_player_id' ) != request('second_player_id')) {
+            $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"');
+
+            if (empty($time)) {
+                $game->first_player_id = request('first_player_id');
+                $game->second_player_id = request('second_player_id');
+                $game->field_id = request('field');
+                $game->time = request('time');
+                $game->date = request('date');
+                // Save it to the Database
+                $game->save();
+            }
+        }
+
+        // And then redirect to the homepage.
+        return redirect('/');
+
     }
 }
