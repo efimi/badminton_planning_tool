@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Game;
 
 
@@ -118,15 +120,58 @@ class GamesController extends Controller
 
     public function update(Request $request)
     {
+            if(request('first_player_id' ) != request('second_player_id')) {
 
-        $data = [
-            'first_player_id' => request('first_player_id'),
-            'second_player_id' => request('second_player_id'),
-            'field_id' => request('field'),
-            'time' => request('time')
-        ];
+                $time = \DB::Select('SELECT id FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"AND id != "'. request('id').'"');
+                $doubleCheck = \DB::Select('SELECT 
+                                          * 
+                                        FROM 
+                                          games 
+                                        WHERE 
+                                          time="' . request('time') . '" 
+                                        AND 
+                                          (
+                                            first_player_id="' . request('first_player_id') . '" 
+                                          OR
+                                            first_player_id="' . request('second_player_id') . '"
+                                          )
+                                        AND
+                                          (
+                                            second_player_id="' . request('first_player_id') . '" 
+                                          OR
+                                            second_player_id="' . request('second_player_id') . '"
+                                          )
+                                          AND id != "'. request('id') .'"
+                                          ');
+                if (empty($time) AND empty($doubleCheck)) {
+                    $up_Data = \DB::Update('UPDATE games 
+                                            SET first_player_id="' . request('first_player_id') . '",
+                                                second_player_id="' . request('second_player_id') . '",
+                                                field_id="' . request('field') . '",
+                                                time="' . request('time') . '",
+                                                date="'.request('date').'"
+                                            WHERE
+                                                id="' . request('id') . '"');
+                }else{
+                    dd($time);
+                    dd($doubleCheck);
+                }
+            }
 
-        $games = \DB::Select('SELECT * FROM games ');
-        return view('players.index', compact('games'));
+        $Gdata = \DB::Select('SELECT 
+                                    g.id AS id,
+                                    p.lastname as Firstname,
+                                    p2.lastname as Secondname,
+                                    f.fieldname as Field,
+                                    g.date as Date,
+                                    g.time as Time
+                                FROM
+                                    games AS g
+                                    JOIN players AS p ON p.id=g.first_player_id
+                                    JOIN players AS p2 ON p2.id=g.second_player_id
+                                    JOIN fields AS f ON f.id=g.field_id 
+                                    order by date DESC, time ASC
+                                    ');
+        return view('games.index', compact('Gdata'));
     }
 }

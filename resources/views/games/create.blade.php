@@ -39,7 +39,12 @@
         </select>
     </div>
 
-    <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+   <!-- <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+-->
+    <div class="form-group">
+        <h5><label for="date" class="col-sm-2 control-label">Datum</label></h5>
+        <input  class="form-control" type="date" name="date" value="{{ date('Y-m-d') }}">
+    </div>
 
     <button type="submit" class="btn btn-default">Erstellen</button>
 

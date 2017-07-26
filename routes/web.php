@@ -38,9 +38,6 @@ Route::post('/spielfeld/{field}', 'FieldsController@update');
 
 // für erstellen von neuen Spielfeldern
 
-
-
-
 Route::get('/login', function () {
     return view('login');
 });
