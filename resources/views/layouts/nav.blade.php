@@ -11,6 +11,7 @@
       <a class="nav-link" href="/spieler">Spieler</a>
     </li>
 
+    {{--  nur bei Login anzeigen lassen --}}
     <li class="nav-item">
       <a class="nav-link" href="/spieler/erstellen">Spieler erstellen</a>
     </li>
