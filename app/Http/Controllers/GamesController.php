@@ -10,7 +10,7 @@ class GamesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['only' => 'create']);
+        $this->middleware('auth', ['except' => 'show', 'index']);
     }
 
     public function index()
@@ -65,5 +65,14 @@ class GamesController extends Controller
         // And then redirect to the homepage.
         return redirect('/');
 
+    }
+    public function edit($id)
+    {
+
+        $Pdata = \DB::Select('SELECT * FROM players');
+        $Fdata = \DB::Select('SELECT * FROM fields');
+        $Gdata = \DB::Select('SELECT * FROM games WHERE id="'.$id.'"');
+
+        return view('games.edit', compact('Pdata', 'Fdata', 'Gdata'));
     }
 }
