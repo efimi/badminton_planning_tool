@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Spielfeld erstellen</h1>
+    <h1>Spielfeld bearbeiten</h1>
     <form method="POST" action="/spielfeld/verarbeitet">
         {{csrf_field() }}
         <div class="form-group">

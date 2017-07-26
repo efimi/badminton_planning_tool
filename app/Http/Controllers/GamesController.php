@@ -15,7 +15,20 @@ class GamesController extends Controller
 
     public function index()
     {
-      return view('games.index');
+        $Gdata = \DB::Select('SELECT                                
+                                    p.lastname as Firstname,
+                                    p2.lastname as Secondname,
+                                    f.fieldname as Field,
+                                    g.date as Date,
+                                    g.time as Time
+                                FROM
+                                    games AS g
+                                    JOIN players AS p ON p.id=g.first_player_id
+                                    JOIN players AS p2 ON p2.id=g.second_player_id
+                                    JOIN fields AS f ON f.id=g.field_id 
+                                    order by date DESC, time ASC
+                                    ');
+      return view('games.index', compact('Gdata'));
     }
     public function show()
     {
@@ -60,8 +73,25 @@ class GamesController extends Controller
 
         if(request('first_player_id' ) != request('second_player_id')) {
             $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"');
-
-            if (empty($time)) {
+            $doubleCheck = \DB::Select('SELECT 
+                                          * 
+                                        FROM 
+                                          games 
+                                        WHERE 
+                                          time="'. request('time').'" 
+                                        AND 
+                                          (
+                                            first_player_id="' . request('first_player_id') . '" 
+                                          OR
+                                            first_player_id="' . request('second_player_id') . '"
+                                          )
+                                        AND
+                                          (
+                                            second_player_id="' . request('first_player_id') . '" 
+                                          OR
+                                            second_player_id="' . request('second_player_id') . '"
+                                          )');
+            if (empty($time) AND empty($doubleCheck)) {
                 $game->first_player_id = request('first_player_id');
                 $game->second_player_id = request('second_player_id');
                 $game->field_id = request('field');

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Spielfeld erstellen</h1>
+    <h1>Spieler bearbeiten</h1>
     <form method="POST" action="/spieler/verarbeitet">
         {{csrf_field() }}
             @foreach($Pdata as $data)
