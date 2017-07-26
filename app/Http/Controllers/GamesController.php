@@ -26,8 +26,9 @@ class GamesController extends Controller
                                     JOIN players AS p ON p.id=g.first_player_id
                                     JOIN players AS p2 ON p2.id=g.second_player_id
                                     JOIN fields AS f ON f.id=g.field_id 
+                                    order by date DESC, time ASC
                                     ');
-      return view('games.index');
+      return view('games.index', compact('Gdata'));
     }
     public function show()
     {
