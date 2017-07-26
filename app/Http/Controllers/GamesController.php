@@ -65,8 +65,6 @@ class GamesController extends Controller
           'field' => 'required',
           'time' => 'required',
           'date' => 'required',
-          'date' => 'required',
-          'body'  => 'required'
       ]);
 
         // create a new Field using the request data

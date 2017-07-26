@@ -57,8 +57,8 @@ class PlayersController extends Controller
       // validate inputs/ make them required
 
       $this->validate(request(),[
-          'title' => 'required',
-          'body'  => 'required'
+          'firstname' => 'required',
+          'lastname'  => 'required'
       ]);
       
       // // create a new Field using the request data
