@@ -38,9 +38,11 @@
                 <option value="13:00:00">13:00:00 - 15:00:00</option>
         </select>
     </div>
+
     <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
 
     <button type="submit" class="btn btn-default">Erstellen</button>
+
 </form>
 <br>
 

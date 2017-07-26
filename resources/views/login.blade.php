@@ -11,6 +11,7 @@
     <label for="password">Passwort: </label>
     <input type="text" class="form-control" id="password" placeholder="password">
   </div>
+  <button type="submit" class="btn btn-default">Einloggen</button>
 </form>
 
 @endsection
