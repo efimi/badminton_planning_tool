@@ -22,7 +22,7 @@
   <body>
 
 <div class="row">
-  <div class="col-md-9 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-4" style="margin:auto;">
     <div class="row">
       <div class="col-md-8">
         @include('layouts.nav')
