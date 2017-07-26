@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Player;
+
 class PlayersController extends Controller
 {
 
@@ -52,13 +54,24 @@ class PlayersController extends Controller
 
     public function store()
     {
-      // create a new Field using the request data
-      $player = new \App\Player;
+      // validate inputs/ make them required
 
-      $player->firstname = request('firstname');
-      $player->lastname = request('lastname');
-      // Save it to the Database
-      $player->save();
+      $this->validate(request(),[
+          'title' => 'required',
+          'body'  => 'required'
+      ]);
+      
+      // // create a new Field using the request data
+      // $player = new \App\Player;
+      //
+      // $player->firstname = request('firstname');
+      // $player->lastname = request('lastname');
+      // // Save it to the Database
+      // $player->save();
+
+      Player::create(request(['firstname','lastname']));
+
+
 
       // And then redirect to the homepage.
       return redirect('/');

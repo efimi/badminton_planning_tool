@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Field;
 
 class FieldsController extends Controller
 {
@@ -25,6 +26,10 @@ class FieldsController extends Controller
     }
     public function store()
     {
+      $this->validate(request(),[
+          'fieldname' => 'required'
+      ]);
+
       // dd(request('name'));
       // dd(request(['title','body']));
       // dd(request()->all());
