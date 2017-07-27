@@ -13,7 +13,7 @@
 
 // nach / kommt die Seite like 'about'....
 // will den view welcome laden
-Route::post('/reload','AjaxController@index');
+Route::post('/reload/{date}','AjaxController@index');
 Route::get('/','GamesController@show');
 Route::get('/spiel/erstellen','GamesController@create');
 Route::get('/spiel/anzeigen','GamesController@index');

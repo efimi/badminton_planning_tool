@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <h1>Spieler bearbeiten</h1>
     <form method="POST" id="edit/delete" action="/spieler/verarbeitet">
         {{csrf_field() }}
@@ -19,7 +20,5 @@
         <button type="submit" class="btn btn-primary">Spieler bearbeiten</button>
     </form>
     <br>
-
-
 
 @endsection

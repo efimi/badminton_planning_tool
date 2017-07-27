@@ -1,7 +1,11 @@
 @extends('layout')
 
 @section('content')
-    <h1> {{ date("d.m.Y") }} </h1>
+    <select id="date" class="form-control">
+    @foreach($dates AS $date)
+      <option @if(date('Y-m-d')==$date->date) selected @endif value="{{ $date->date }}">{{ $date->date }}</option>
+    @endforeach
+    </select>
   <table class="table">
       <thead>
           <tr>
@@ -47,10 +51,11 @@
     $(document).ready(function(){
         // AJAX-function
         setInterval(function(){
-
+            var path ="/reload/";
+             path += $('#date option:selected').val();
             $.ajax({
                 type:'POST',
-                url:'/reload',
+                url: path,
                 data:{"_token": "<?php echo csrf_token() ?>"},
                 success:function(data){
                     console.log(data)
@@ -59,7 +64,7 @@
             });
 
             // $("#matchBody").load("/layouts/tbody.blade.php");
-        }, 1500);
+        }, 1000);
     });
 </script>
 @endsection

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
-    public function index(){
+    public function index($date){
 
         $games = \DB::Select('SELECT
                              p.lastname AS firstPlayer,
@@ -19,7 +19,7 @@ class AjaxController extends Controller
                             JOIN players AS p on g.first_player_id=p.id
                             JOIN players AS p2 on g.second_player_id=p2.id
                             JOIN fields AS f on g.field_id=f.id
-                            WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
+                            WHERE date="'.$date.'" order by field_id ASC, time ASC');
 
 
 $msg="";
