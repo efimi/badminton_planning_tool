@@ -60,16 +60,17 @@ class PlayersController extends Controller
           'firstname' => 'required',
           'lastname'  => 'required'
       ]);
-      
-      // // create a new Field using the request data
-       $player = new \App\Player;
-      //
-       $player->firstname = request('firstname');
-       $player->lastname = request('lastname');
-      // // Save it to the Database
-       $player->save();
 
-      //Player::create(request(['firstname','lastname']));
+      // // // create a new Field using the request data
+      //  $player = new \App\Player;
+      // //
+      //  $player->firstname = request('firstname');
+      //  $player->lastname = request('lastname');
+      // // // Save it to the Database
+      //  $player->save();
+
+      // Model muss angepasst werden
+      Player::create(request(['firstname','lastname']));
 
 
 
