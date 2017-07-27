@@ -75,7 +75,7 @@ class GamesController extends Controller
         $game = new \App\Game;
 
         if(request('first_player_id' ) != request('second_player_id')) {
-            $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"');
+            $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '" AND field_id ="'.request('field') .'"');
             $doubleCheck = \DB::Select('SELECT
                                           *
                                         FROM
@@ -104,7 +104,21 @@ class GamesController extends Controller
                 $game->date = request('date');
                 // Save it to the Database
                 $game->save();
+            }else{
+                if(!empty($doubleCheck)){
+                    return back()->withErrors([
+                        'massage' => 'Einer der Spieler hat bereits ein angesetztes Spiel zu dieser Zeit'
+                    ]);
+                }else{
+                    return back()->withErrors([
+                        'massage' => 'Es findet bereits ein Spiel  Spiel zu dieser Zeit'
+                    ]);
+                }
             }
+        }else{
+            return back()->withErrors([
+                'massage' => 'Der Spieler wurde doppelt ausgewählt'
+            ]);
         }
 
         // And then redirect to the homepage.
