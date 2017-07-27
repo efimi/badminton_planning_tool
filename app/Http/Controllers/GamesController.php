@@ -76,8 +76,27 @@ class GamesController extends Controller
 
         if(request('first_player_id' ) != request('second_player_id')) {
             $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"');
-
-            if (empty($time)) {
+            $doubleCheck = \DB::Select('SELECT
+                                          *
+                                        FROM
+                                          games
+                                        WHERE
+                                          time="' . request('time') . '"
+                                        AND
+                                          (
+                                            first_player_id="' . request('first_player_id') . '"
+                                          OR
+                                            first_player_id="' . request('second_player_id') . '"
+                                          )
+                                        AND
+                                          (
+                                            second_player_id="' . request('first_player_id') . '"
+                                          OR
+                                            second_player_id="' . request('second_player_id') . '"
+                                          )
+                                          AND id != "'. request('id') .'"
+                                          ');
+            if (empty($time) AND empty($doubleCheck)) {
                 $game->first_player_id = request('first_player_id');
                 $game->second_player_id = request('second_player_id');
                 $game->field_id = request('field');
