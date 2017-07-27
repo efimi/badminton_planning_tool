@@ -23,18 +23,31 @@ class AjaxController extends Controller
 
 
 $msg="";
-        foreach ($games as $game){
-            if(!isset($currentField) || $currentField != $game->field ) {
-                $currentField = $game->field;
-        $msg .='
-            <tr>
-                <td>'.  $game->field .'</td>
-            ';
-            }
-        $msg .='    
-            <td>'.  $game->firstPlayer  .'<br>'.  $game->secondPlayer .'</td>
-        ';
+
+foreach ($games as $game) {
+    if (!isset($currentField) || $currentField != $game->field) {
+        $currentField = $game->field;
+        $currentState = 1;
+        if (isset($currentField)) {
+            $msg .= "</tr>";
         }
+        $msg .= '
+<tr>
+    <td>' . $game->field . '</td>';
+    }
+    if ($game->time == "09:00:00") {
+        $msg .='<td>'.$game->firstPlayer.' <br > '.$game->secondPlayer.' </td >';
+    } elseif (($game->time == "11:00:00" AND $currentState == 1) OR ($game->time == "13:00:00" AND $currentState == 2)){
+        $msg.='<td ></td >
+        <td > '.$game->firstPlayer.' <br > '.$game->secondPlayer.' </td >';
+    }elseif($game->time =="13:00:00" AND $currentState==1) {
+        $msg .='<td ></td >
+        <td ></td >
+        <td > '.$game->firstPlayer .'<br >'. $game->secondPlayer.' </td >';
+  }
+
+    $currentState++;
+    }
 
         return $msg;
     }

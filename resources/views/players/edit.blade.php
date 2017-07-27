@@ -9,11 +9,11 @@
             @endforeach
         <div class="form-group">
             <label for="firstname">Vorname:</label>
-            <input type="text" class="form-control" placeholder="Vorname" id="firstname" name="firstname">
+            <input type="text" class="form-control" placeholder="{{ $data->firstname }}" id="firstname" name="firstname">
         </div>
         <div class="form-group">
             <label for="lastname">Nachname:</label>
-            <input type="text" class="form-control" placeholder="Nachname" id="lastname" name="lastname">
+            <input type="text" class="form-control" placeholder="{{ $data->lastname }}" id="lastname" name="lastname">
         </div>
 
         <button type="submit" class="btn btn-primary">Spieler bearbeiten</button>

@@ -16,14 +16,28 @@
       <?php foreach ($games as $game){
       if(!isset($currentField) || $currentField != $game->field ) {
       $currentField = $game->field;
+      $currentState=1;
+      if(isset($currentField)){
+          echo "</tr>";
+      }
   ?>
       <tr>
           <td>{{ $game->field }}</td>
 
           <?php } ?>
-
-          <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
-    <?php } ?>
+          @if($game->time =="09:00:00")
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @elseif(($game->time =="11:00:00" AND $currentState==1) OR ($game->time =="13:00:00" AND $currentState==2))
+              <td></td>
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @elseif($game->time =="13:00:00" AND $currentState==1)
+              <td></td>
+              <td></td>
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @endif
+    <?php
+      $currentState++;
+      } ?>
 
       </tbody>
   </table>
@@ -45,7 +59,7 @@
             });
 
             // $("#matchBody").load("/layouts/tbody.blade.php");
-        }, 500);
+        }, 1500);
     });
 </script>
 @endsection
