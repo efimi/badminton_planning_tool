@@ -39,7 +39,12 @@
         </select>
     </div>
 
-    <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+   <!-- <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+-->
+    <div class="form-group">
+        <h5><label for="date" class="col-sm-2 control-label">Datum</label></h5>
+        <input  class="form-control" type="date" name="date" value="{{ date('Y-m-d') }}">
+    </div>
 
     <button type="submit" class="btn btn-default">Erstellen</button>
 
@@ -47,6 +52,22 @@
 </form>
 <br>
 
+<<<<<<< HEAD
+=======
+{{--  show errors --}}
+@if(count($errors))
+    <div class="form-group">
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li> {{ $error }}</li>
+
+          @endforeach
+        </ul>
+      </div>
+    </div>
+@endif
+>>>>>>> e8f7c84d9077adc2a4176ae1e74ea807b73d6951
 
 @endsection
 

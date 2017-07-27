@@ -67,4 +67,14 @@ class FieldsController extends Controller
         return view('fields.show', compact('data'));
     }
 
+    public function delete(Request $request, $id)
+    {
+
+        $delete = \DB::Delete('DELETE FROM games WHERE field_id='.$id);
+        $delete = Field::find($id);
+        $delete ->delete();
+
+        return redirect('/spielfeld');
+    }
+
 }
