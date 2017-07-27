@@ -38,6 +38,8 @@
               <td></td>
               <td></td>
               <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @else
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
           @endif
     <?php
       $currentState++;

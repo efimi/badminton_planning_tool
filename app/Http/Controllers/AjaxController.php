@@ -44,7 +44,9 @@ foreach ($games as $game) {
         $msg .='<td ></td >
         <td ></td >
         <td > '.$game->firstPlayer .'<br >'. $game->secondPlayer.' </td >';
-  }
+  }else{
+        $msg .= '<td > '.$game->firstPlayer .'<br >'. $game->secondPlayer.' </td >';
+    }
 
     $currentState++;
     }
