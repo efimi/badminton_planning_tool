@@ -81,7 +81,7 @@ class PlayersController extends Controller
     public function edit($id)
     {
         $Pdata = \DB::Select('SELECT * FROM players WHERE id="'.$id.'"');
-        return view('players.edit', compact('P data'));
+        return view('players.edit', compact('Pdata'));
     }
 
     public function update(Request $request)
