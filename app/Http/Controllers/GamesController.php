@@ -169,11 +169,24 @@ class GamesController extends Controller
                                                 date="'.request('date').'"
                                             WHERE
                                                 id="' . request('id') . '"');
+
                 }else{
-                    dd($time);
-                    dd($doubleCheck);
+                    if(!empty($doubleCheck)){
+                        return back()->withErrors([
+                            'massage' => 'Einer der Spieler hat bereits ein angesetztes Spiel zu dieser Zeit'
+                        ]);
+                    }else{
+                        return back()->withErrors([
+                            'massage' => 'Es findet bereits ein Spiel  Spiel zu dieser Zeit'
+                        ]);
+                    }
                 }
+            }else{
+                return back()->withErrors([
+                    'massage' => 'Der Spieler wurde doppelt ausgewählt'
+                ]);
             }
+
 
         $Gdata = \DB::Select('SELECT
                                     g.id AS id,
