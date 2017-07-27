@@ -11,20 +11,31 @@
               <th>13:00-15:00</th>
           </tr>
       </thead>
-      <tbody>
+      <tbody id="matchBody">
 
-            @foreach ($games as $game)
-                <?php if(!isset($currentField) || $currentField != $game->field ) {
-                    $currentField = $game->field;
 
-                    ?>
-                    <tr>
-                        <td>{{$game->field}}</td>
-                <?php } ?>
-                        <td> {{ $game->firstPlayer }} <br> {{ $game->secondPlayer }}</td>
 
-            @endforeach
       </tbody>
   </table>
 
+
+<script>
+    $(document).ready(function(){
+        // AJAX-function
+        setInterval(function(){
+
+            $.ajax({
+                type:'POST',
+                url:'/reload',
+                data:{"_token": "<?php echo csrf_token() ?>"},
+                success:function(data){
+                    console.log(data)
+                    $("#matchBody").html(data);
+                }
+            });
+
+            // $("#matchBody").load("/layouts/tbody.blade.php");
+        }, 3000);
+    });
+</script>
 @endsection

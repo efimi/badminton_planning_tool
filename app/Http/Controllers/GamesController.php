@@ -111,7 +111,7 @@ class GamesController extends Controller
                     ]);
                 }else{
                     return back()->withErrors([
-                        'massage' => 'Es findet bereits ein Spiel  Spiel zu dieser Zeit'
+                        'massage' => 'Es findet bereits ein Spiel zu dieser Zeit'
                     ]);
                 }
             }
@@ -177,7 +177,7 @@ class GamesController extends Controller
                         ]);
                     }else{
                         return back()->withErrors([
-                            'massage' => 'Es findet bereits ein Spiel  Spiel zu dieser Zeit'
+                            'massage' => 'Es findet bereits ein Spiel zu dieser Zeit'
                         ]);
                     }
                 }

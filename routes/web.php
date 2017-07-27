@@ -13,6 +13,7 @@
 
 // nach / kommt die Seite like 'about'....
 // will den view welcome laden
+Route::post('/reload','AjaxController@index');
 Route::get('/','GamesController@show');
 Route::get('/spiel/erstellen','GamesController@create');
 Route::get('/spiel/anzeigen','GamesController@index');
@@ -44,6 +45,7 @@ Route::post('/spielfeld/{field}', 'FieldsController@update');
 Route::get('/login', function () {
     return view('login');
 });
+
 
 Auth::routes();
 
