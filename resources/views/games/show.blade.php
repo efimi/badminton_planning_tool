@@ -13,7 +13,17 @@
       </thead>
       <tbody id="matchBody">
 
+      <?php foreach ($games as $game){
+      if(!isset($currentField) || $currentField != $game->field ) {
+      $currentField = $game->field;
+  ?>
+      <tr>
+          <td>{{ $game->field }}</td>
 
+          <?php } ?>
+
+          <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+    <?php } ?>
 
       </tbody>
   </table>
@@ -35,7 +45,7 @@
             });
 
             // $("#matchBody").load("/layouts/tbody.blade.php");
-        }, 3000);
+        }, 500);
     });
 </script>
 @endsection

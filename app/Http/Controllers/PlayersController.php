@@ -81,17 +81,23 @@ class PlayersController extends Controller
     public function edit($id)
     {
         $Pdata = \DB::Select('SELECT * FROM players WHERE id="'.$id.'"');
-        return view('players.edit', compact('Pdata'));
+        return view('players.edit', compact('P data'));
     }
 
     public function update(Request $request)
     {
 
-        if(request('firstname') != ""){
-            $Pdata = \DB::Update('UPDATE players SET firstname = "'. request('firstname') .'" WHERE id="'. request('id').'"');
+        if(request('firstname') != "") {
+            $Pdata = \DB::SELECT('SELECT * FROM players WHERE firstname="' . request('firstname') . '"');
+            if (empty($Pdata)) {
+                $Pdata = \DB::Update('UPDATE players SET firstname = "' . request('firstname') . '" WHERE id="' . request('id') . '"');
+            }
         }
-        if(request('lastname') != ""){
-            $Pdata = \DB::Update('UPDATE players SET lastname = "'. request('lastname') .'" WHERE id="'. request('id').'"');
+        if(request('lastname') != "") {
+            $Pdata = \DB::SELECT('SELECT * FROM players WHERE lastname="' . request('lastname') . '"');
+            if (empty($Pdata)) {
+                $Pdata = \DB::Update('UPDATE players SET lastname = "' . request('lastname') . '" WHERE id="' . request('id') . '"');
+            }
         }
         $data = [
             'fieldname' => request('fieldname'),
