@@ -17,10 +17,7 @@ class GamesController extends Controller
 
     public function index()
     {
-<<<<<<< HEAD
-      return view('games.index');
-=======
-        $Gdata = \DB::Select('SELECT 
+        $Gdata = \DB::Select('SELECT
                                     g.id AS id,
                                     p.lastname as Firstname,
                                     p2.lastname as Secondname,
@@ -31,11 +28,11 @@ class GamesController extends Controller
                                     games AS g
                                     JOIN players AS p ON p.id=g.first_player_id
                                     JOIN players AS p2 ON p2.id=g.second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id 
+                                    JOIN fields AS f ON f.id=g.field_id
                                     order by date DESC, time ASC
                                     ');
       return view('games.index', compact('Gdata'));
->>>>>>> e8f7c84d9077adc2a4176ae1e74ea807b73d6951
+
     }
     public function show()
     {
@@ -71,11 +68,7 @@ class GamesController extends Controller
           'second_player_id' => 'required',
           'field' => 'required',
           'time' => 'required',
-          'date' => 'required',
-<<<<<<< HEAD
-          'date' => 'required'    
-=======
->>>>>>> e8f7c84d9077adc2a4176ae1e74ea807b73d6951
+          'date' => 'required'
       ]);
 
         // create a new Field using the request data
@@ -114,28 +107,28 @@ class GamesController extends Controller
             if(request('first_player_id' ) != request('second_player_id')) {
 
                 $time = \DB::Select('SELECT id FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"AND id != "'. request('id').'"');
-                $doubleCheck = \DB::Select('SELECT 
-                                          * 
-                                        FROM 
-                                          games 
-                                        WHERE 
-                                          time="' . request('time') . '" 
-                                        AND 
+                $doubleCheck = \DB::Select('SELECT
+                                          *
+                                        FROM
+                                          games
+                                        WHERE
+                                          time="' . request('time') . '"
+                                        AND
                                           (
-                                            first_player_id="' . request('first_player_id') . '" 
+                                            first_player_id="' . request('first_player_id') . '"
                                           OR
                                             first_player_id="' . request('second_player_id') . '"
                                           )
                                         AND
                                           (
-                                            second_player_id="' . request('first_player_id') . '" 
+                                            second_player_id="' . request('first_player_id') . '"
                                           OR
                                             second_player_id="' . request('second_player_id') . '"
                                           )
                                           AND id != "'. request('id') .'"
                                           ');
                 if (empty($time) AND empty($doubleCheck)) {
-                    $up_Data = \DB::Update('UPDATE games 
+                    $up_Data = \DB::Update('UPDATE games
                                             SET first_player_id="' . request('first_player_id') . '",
                                                 second_player_id="' . request('second_player_id') . '",
                                                 field_id="' . request('field') . '",
@@ -149,7 +142,7 @@ class GamesController extends Controller
                 }
             }
 
-        $Gdata = \DB::Select('SELECT 
+        $Gdata = \DB::Select('SELECT
                                     g.id AS id,
                                     p.lastname as Firstname,
                                     p2.lastname as Secondname,
@@ -160,7 +153,7 @@ class GamesController extends Controller
                                     games AS g
                                     JOIN players AS p ON p.id=g.first_player_id
                                     JOIN players AS p2 ON p2.id=g.second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id 
+                                    JOIN fields AS f ON f.id=g.field_id
                                     order by date DESC, time ASC
                                     ');
         return view('games.index', compact('Gdata'));

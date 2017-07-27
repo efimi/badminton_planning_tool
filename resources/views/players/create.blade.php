@@ -21,12 +21,9 @@
   </form>
 
 <br>
-<<<<<<< HEAD
 
   {{--  show errors --}}
 
-
-=======
 @if(count($errors))
   <div class="form-group">
     <div class="alert alert-danger">
@@ -39,7 +36,7 @@
     </div>
   </div>
 @endif
->>>>>>> e8f7c84d9077adc2a4176ae1e74ea807b73d6951
+
 @endsection
 
 
