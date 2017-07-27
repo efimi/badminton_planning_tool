@@ -35,15 +35,17 @@ class FieldsController extends Controller
       // dd(request(['title','body']));
       // dd(request()->all());
 
-      // create a new Field using the request data
-      $field = new \App\Field;
-
-      $field->fieldname = request('fieldname');
-      // Save it to the Database
-      $field->save();
-
+      // // create a new Field using the request data
+      // $field = new \App\Field;
+      //
+      // $field->fieldname = request('fieldname');
+      // // Save it to the Database
+      // $field->save();
+      Field::create(request(['fieldname']));
       // And then redirect to the homepage.
-      return redirect('/');
+      $instanceName = "Spielfeld";
+      // And then redirect to the landingpage.
+      return view('created', compact('instanceName'));
 
     }
     public function edit($id)
@@ -65,16 +67,6 @@ class FieldsController extends Controller
         ];
 
         return view('fields.show', compact('data'));
-    }
-
-    public function delete(Request $request, $id)
-    {
-
-        $delete = \DB::Delete('DELETE FROM games WHERE field_id='.$id);
-        $delete = Field::find($id);
-        $delete ->delete();
-
-        return redirect('/spielfeld');
     }
 
 }

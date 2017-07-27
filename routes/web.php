@@ -46,5 +46,7 @@ Route::get('/login', function () {
 });
 
 Auth::routes();
-
+Route::get('/erstellt',function (){
+    return view('created');
+});
 Route::get('/home', 'HomeController@index')->name('home');

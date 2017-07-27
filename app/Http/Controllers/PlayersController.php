@@ -73,9 +73,9 @@ class PlayersController extends Controller
       Player::create(request(['firstname','lastname']));
 
 
-
+      $instanceName = "Spieler";
       // And then redirect to the homepage.
-      return redirect('/spieler');
+      return view('created', compact('instanceName'));
 
     }
     public function edit($id)

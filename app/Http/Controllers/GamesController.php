@@ -121,8 +121,9 @@ class GamesController extends Controller
             ]);
         }
 
-        // And then redirect to the homepage.
-        return redirect('/');
+        $instanceName = "Spiel";
+        // And then redirect to the landingpage.
+        return view('created', compact('instanceName'));
 
     }
     public function edit($id)
