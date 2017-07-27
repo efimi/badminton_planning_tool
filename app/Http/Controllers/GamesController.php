@@ -174,4 +174,13 @@ class GamesController extends Controller
                                     ');
         return view('games.index', compact('Gdata'));
     }
+
+    public function delete(Request $request, $id)
+    {
+
+        $delete = Game::find($id);
+        $delete ->delete();
+
+        return redirect('/spiel/anzeigen');
+    }
 }

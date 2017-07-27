@@ -62,19 +62,19 @@ class PlayersController extends Controller
       ]);
       
       // // create a new Field using the request data
-      // $player = new \App\Player;
+       $player = new \App\Player;
       //
-      // $player->firstname = request('firstname');
-      // $player->lastname = request('lastname');
+       $player->firstname = request('firstname');
+       $player->lastname = request('lastname');
       // // Save it to the Database
-      // $player->save();
+       $player->save();
 
-      Player::create(request(['firstname','lastname']));
+      //Player::create(request(['firstname','lastname']));
 
 
 
       // And then redirect to the homepage.
-      return redirect('/');
+      return redirect('/spieler');
 
     }
     public function edit($id)
@@ -99,6 +99,16 @@ class PlayersController extends Controller
 
         $players = \DB::Select('SELECT * FROM players ');
         return view('players.index', compact('players'));
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $players = \DB::Select('SELECT * FROM players WHERE id="'.$id.'"');
+        $delete = \DB::Delete('DELETE FROM games WHERE first_player_id='.$id.' OR second_player_id='.$id);
+        $delete = Player::find($id);
+        $delete ->delete();
+
+        return redirect('/spieler');
     }
 
 }
