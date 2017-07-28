@@ -1,7 +1,11 @@
 @extends('layout')
 
 @section('content')
-    <h1> {{ date("d.m.Y") }} </h1>
+    <select id="date" class="form-control">
+    @foreach($dates AS $date)
+      <option @if(date('Y-m-d')==$date->date) selected @endif value="{{ $date->date }}">{{ $date->date }}</option>
+    @endforeach
+    </select>
   <table class="table">
       <thead>
           <tr>
@@ -16,14 +20,30 @@
       <?php foreach ($games as $game){
       if(!isset($currentField) || $currentField != $game->field ) {
       $currentField = $game->field;
+      $currentState=1;
+      if(isset($currentField)){
+          echo "</tr>";
+      }
   ?>
       <tr>
           <td>{{ $game->field }}</td>
 
           <?php } ?>
-
-          <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
-    <?php } ?>
+          @if($game->time =="09:00:00")
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @elseif(($game->time =="11:00:00" AND $currentState==1) OR ($game->time =="13:00:00" AND $currentState==2))
+              <td></td>
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @elseif($game->time =="13:00:00" AND $currentState==1)
+              <td></td>
+              <td></td>
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @else
+              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+          @endif
+    <?php
+      $currentState++;
+      } ?>
 
       </tbody>
   </table>
@@ -33,10 +53,11 @@
     $(document).ready(function(){
         // AJAX-function
         setInterval(function(){
-
+            var path ="/reload/";
+             path += $('#date option:selected').val();
             $.ajax({
                 type:'POST',
-                url:'/reload',
+                url: path,
                 data:{"_token": "<?php echo csrf_token() ?>"},
                 success:function(data){
                     console.log(data)
@@ -45,7 +66,7 @@
             });
 
             // $("#matchBody").load("/layouts/tbody.blade.php");
-        }, 500);
+        }, 1000);
     });
 </script>
 @endsection

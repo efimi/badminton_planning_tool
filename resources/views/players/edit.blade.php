@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <h1>Spieler bearbeiten</h1>
     <form method="POST" id="edit/delete" action="/spieler/verarbeitet">
         {{csrf_field() }}
@@ -9,17 +10,15 @@
             @endforeach
         <div class="form-group">
             <label for="firstname">Vorname:</label>
-            <input type="text" class="form-control" placeholder="{{ $Pdata->firstname }}" id="firstname" name="firstname">
+            <input type="text" class="form-control" placeholder="{{ $data->firstname }}" id="firstname" name="firstname">
         </div>
         <div class="form-group">
             <label for="lastname">Nachname:</label>
-            <input type="text" class="form-control" placeholder="{{ $Pdata->lastname }}" id="lastname" name="lastname">
+            <input type="text" class="form-control" placeholder="{{ $data->lastname }}" id="lastname" name="lastname">
         </div>
 
         <button type="submit" class="btn btn-primary">Spieler bearbeiten</button>
     </form>
     <br>
-
-
 
 @endsection

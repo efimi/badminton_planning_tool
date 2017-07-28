@@ -37,7 +37,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="width:90%;"class="modal-title text-center">Wollen Sie den das Spiel wirklich Löschen?</h4>
+                        <h4 style="width:90%;"class="modal-title text-center">Wollen Sie den Spieler wirklich Löschen?</h4>
                     </div>
                     <div class="modal-body ">
                         <a id="deleted" href="" type="button" class="btn-block btn btn-primary">Ja</a>

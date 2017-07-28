@@ -50,7 +50,8 @@ class GamesController extends Controller
                             JOIN fields AS f on g.field_id=f.id
                             WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
 
-      return view('games.show', compact('games'));
+      $dates = \DB::Select('SELECT date FROM games GROUP BY date ORDER BY date DESC');
+      return view('games.show', compact('games', 'dates'));
     }
 
 
