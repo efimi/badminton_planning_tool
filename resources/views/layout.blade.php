@@ -26,7 +26,7 @@
 <div class="row">
   <div class="col-md-8" style="margin:auto;">
     <div class="row">
-      <div class="@if(Auth::guest()) col-md-12  @else col-md-7 @endif">
+      <div class="@if(Auth::guest()) col-md-12  @else col-md-8 @endif">
         @include('layouts.nav')
 
           @yield('content')
@@ -35,7 +35,7 @@
       </div>
 
         @if(isset(Auth::user()->name ) )
-          <div class="col-md-5">
+          <div class="col-md-4">
             @include('layouts.sidebar')
           </div>
         @endif
