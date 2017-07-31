@@ -41,7 +41,15 @@ class FieldsController extends Controller
       // $field->fieldname = request('fieldname');
       // // Save it to the Database
       // $field->save();
-      Field::create(request(['fieldname']));
+
+        $Fdata = \DB::SELECT('SELECT * FROM fields WHERE fieldname="' . request('fieldname') . '"');
+        if(empty($Fdata)) {
+            Field::create(request(['fieldname']));
+        }else{
+            return back()->withErrors([
+                'massage' => 'Eines der Spielfelder hat bereits ein den gleichen Namen.'
+            ]);
+        }
       // And then redirect to the homepage.
       $instanceName = "Spielfeld";
       // And then redirect to the landingpage.
@@ -59,8 +67,16 @@ class FieldsController extends Controller
     {
 
         if(request('fieldname') != ""){
-            $Fdata = \DB::Update('UPDATE fields SET fieldname = "'. request('fieldname') .'" WHERE id="'. request('id').'"');
+            $Fdata = \DB::SELECT('SELECT * FROM fields WHERE fieldname="' . request('fieldname') . '"');
+            if(empty($Fdata)) {
+                $Fdata = \DB::Update('UPDATE fields SET fieldname = "' . request('fieldname') . '" WHERE id="' . request('id') . '"');
+            }else{
+                return back()->withErrors([
+                    'massage' => 'Eines der Spielfelder hat bereits ein den gleichen Namen.'
+                ]);
+            }
         }
+
         $data = [
             'fieldname' => request('fieldname'),
             'id' => request('id')
