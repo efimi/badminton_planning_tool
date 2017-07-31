@@ -38,7 +38,9 @@ class GamesController extends Controller
     {
 
       $games = \DB::Select('SELECT
+                             p.firstname AS firstPlayerFirst, 
                              p.lastname AS firstPlayer,
+                             p2.firstname AS secondPlayerFirst,
                              p2.lastname AS secondPlayer,
                              f.fieldname AS field,
                              g.date,
