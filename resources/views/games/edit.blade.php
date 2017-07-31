@@ -54,7 +54,7 @@
             <input  class="form-control" type="date" name="date" value="{{ $G_date }}">
         </div>
         <input type="reset" class="btn btn-default">
-        <button type="submit" class="btn btn-default">Bearbeiten</button>
+        <button type="submit" class="btn btn-default">Speichern</button>
 
     </form>
     <br>
