@@ -61,16 +61,18 @@ class PlayersController extends Controller
           'lastname'  => 'required'
       ]);
 
-      // // // create a new Field using the request data
-      //  $player = new \App\Player;
-      // //
-      //  $player->firstname = request('firstname');
-      //  $player->lastname = request('lastname');
-      // // // Save it to the Database
-      //  $player->save();
+        if (request('firstname') != "" AND request('lastname') != ""){
+            $Pdata = \DB::SELECT('SELECT * FROM players WHERE firstname="' . request('firstname') . '" AND lastname="' . request('lastname') . '"');
+            $CPdata =  \DB::SELECT('SELECT * FROM players  WHERE id="' . request('id') . '"');
+            if(empty($Pdata)){
+                Player::create(request(['firstname','lastname']));
+            }else{
+                return back()->withErrors([
+                    'massage' => 'Einer der Spieler hat bereits ein den gleichen Namen.'
+                ]);
+            }
+        }
 
-      // Model muss angepasst werden
-      Player::create(request(['firstname','lastname']));
 
 
       $instanceName = "Spieler";
@@ -86,19 +88,44 @@ class PlayersController extends Controller
 
     public function update(Request $request)
     {
-
-        if(request('firstname') != "") {
+        if (request('firstname') != "" AND request('lastname') != ""){
+            $Pdata = \DB::SELECT('SELECT * FROM players WHERE firstname="' . request('firstname') . '" AND lastname="' . request('lastname') . '"');
+            $CPdata =  \DB::SELECT('SELECT * FROM players  WHERE id="' . request('id') . '"');
+            if(empty($Pdata)){
+                $Pdata = \DB::Update('UPDATE players SET firstname = "' . request('firstname') . '", lastname = "' . request('lastname') . '" 
+                WHERE id="' . request('id') . '"');
+            }else{
+                return back()->withErrors([
+                    'massage' => 'Einer der Spieler hat bereits ein den gleichen Namen.'
+                ]);
+            }
+        }elseif(request('firstname') != "") {
             $Pdata = \DB::SELECT('SELECT * FROM players WHERE firstname="' . request('firstname') . '"');
+            $CPdata =  \DB::SELECT('SELECT * FROM players  WHERE id="' . request('id') . '"');
             if (empty($Pdata)) {
                 $Pdata = \DB::Update('UPDATE players SET firstname = "' . request('firstname') . '" WHERE id="' . request('id') . '"');
+            }elseif($Pdata[0]->lastname != $CPdata[0]->lastname ){
+                $Pdata = \DB::Update('UPDATE players SET firstname = "' . request('firstname') . '" WHERE id="' . request('id') . '"');
+           }else{
+                return back()->withErrors([
+                    'massage' => 'Einer der Spieler hat bereits ein den gleichen Namen.'
+                ]);
             }
-        }
-        if(request('lastname') != "") {
+        }elseif(request('lastname') != "") {
             $Pdata = \DB::SELECT('SELECT * FROM players WHERE lastname="' . request('lastname') . '"');
+            $CPdata =  \DB::SELECT('SELECT * FROM players  WHERE id="' . request('id') . '"');
             if (empty($Pdata)) {
                 $Pdata = \DB::Update('UPDATE players SET lastname = "' . request('lastname') . '" WHERE id="' . request('id') . '"');
+            }elseif($Pdata[0]->firstname != $CPdata[0]->firstname ){
+                $Pdata = \DB::Update('UPDATE players SET lastname = "' . request('lastname') . '" WHERE id="' . request('id') . '"');
+            }else{
+                return back()->withErrors([
+                    'massage' => 'Einer der Spieler hat bereits ein den gleichen Namen.'
+                ]);
             }
         }
+
+
         $data = [
             'fieldname' => request('fieldname'),
             'id' => request('id')

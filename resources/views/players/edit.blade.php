@@ -21,4 +21,6 @@
     </form>
     <br>
 
+    @include('layouts.errors')
+
 @endsection

@@ -9,7 +9,9 @@ class AjaxController extends Controller
     public function index($date){
 
         $games = \DB::Select('SELECT
+                             p.firstname AS firstPlayerFirst, 
                              p.lastname AS firstPlayer,
+                             p2.firstname AS secondPlayerFirst,
                              p2.lastname AS secondPlayer,
                              f.fieldname AS field,
                              g.date,
@@ -36,21 +38,23 @@ foreach ($games as $game) {
     <td>' . $game->field . '</td>';
     }
     if ($game->time == "09:00:00") {
-        $msg .='<td>'.$game->firstPlayer.' <br > '.$game->secondPlayer.' </td >';
+        $msg .='<td>'.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer.' 
+        <br > '.substr($game->secondPlayerFirst, 0, 3).'. '.$game->secondPlayer.' </td >';
     } elseif (($game->time == "11:00:00" AND $currentState == 1) OR ($game->time == "13:00:00" AND $currentState == 2)){
         $msg.='<td ></td >
-        <td > '.$game->firstPlayer.' <br > '.$game->secondPlayer.' </td >';
+        <td > '.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer.' 
+        <br > '.substr($game->secondPlayerFirst, 0, 3).'. '.$game->secondPlayer.' </td >';
     }elseif($game->time =="13:00:00" AND $currentState==1) {
         $msg .='<td ></td >
         <td ></td >
-        <td > '.$game->firstPlayer .'<br >'. $game->secondPlayer.' </td >';
-  }else{
-        $msg .= '<td > '.$game->firstPlayer .'<br >'. $game->secondPlayer.' </td >';
+        <td >'.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer .'
+        <br >'.substr($game->secondPlayerFirst, 0, 3).'. '. $game->secondPlayer.' </td >';
+    }else{
+        $msg .= '<td > '.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer .'
+        <br >'.substr($game->secondPlayerFirst, 0, 3).'. '. $game->secondPlayer.' </td >';
     }
-
-    $currentState++;
+        $currentState++;
     }
-
         return $msg;
     }
 }

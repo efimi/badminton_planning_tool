@@ -2,8 +2,11 @@
 
 @section('content')
     <select id="date" class="form-control">
+        <option  selected  value="{{ date('Y-m-d') }}">{{ date('Y-m-d') }}</option>
     @foreach($dates AS $date)
-      <option @if(date('Y-m-d')==$date->date) selected @endif value="{{ $date->date }}">{{ $date->date }}</option>
+            @if(date('Y-m-d')!=$date->date)
+              <option @if(date('Y-m-d')==$date->date) selected @endif value="{{ $date->date }}">{{ $date->date }}</option>
+            @endif
     @endforeach
     </select>
   <table class="table">
@@ -30,16 +33,16 @@
 
           <?php } ?>
           @if($game->time =="09:00:00")
-              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+              <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
           @elseif(($game->time =="11:00:00" AND $currentState==1) OR ($game->time =="13:00:00" AND $currentState==2))
               <td></td>
-              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+              <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
           @elseif($game->time =="13:00:00" AND $currentState==1)
               <td></td>
               <td></td>
-              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+              <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{ $game->secondPlayer }}</td>
           @else
-              <td>{{ $game->firstPlayer }}<br>{{ $game->secondPlayer }}</td>
+              <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{ $game->secondPlayer }}</td>
           @endif
     <?php
       $currentState++;
@@ -60,12 +63,9 @@
                 url: path,
                 data:{"_token": "<?php echo csrf_token() ?>"},
                 success:function(data){
-                    console.log(data)
                     $("#matchBody").html(data);
                 }
             });
-
-            // $("#matchBody").load("/layouts/tbody.blade.php");
         }, 1000);
     });
 </script>
