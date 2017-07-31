@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Field;
+use App\Game;
 
 class FieldsController extends Controller
 {
@@ -55,9 +56,9 @@ class FieldsController extends Controller
     {
 
         if(request('fieldname') != ""){
-            $Fdata = \DB::SELECT('SELECT * FROM fields WHERE fieldname="' . request('fieldname') . '"');
-            if(empty($Fdata)) {
-                $Fdata = \DB::Update('UPDATE fields SET fieldname = "' . request('fieldname') . '" WHERE id="' . request('id') . '"');
+            $Fdata = Field::where('fieldname','=', request('fieldname'))->get();
+            if(!isset($Fdata[0])) {
+                $Fdata = Field::where('id', '=', request('id'))->update(['fieldname'=> request('fieldname')]);
             }else{
                 return back()->withErrors([
                     'massage' => 'Eines der Spielfelder hat bereits ein den gleichen Namen.'
@@ -75,9 +76,8 @@ class FieldsController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $delete = \DB::Delete('DELETE FROM games WHERE field_id='.$id);
-        $delete = Field::find($id);
-        $delete ->delete();
+        $delete = Game::find($id)->delete();
+        $delete = Field::find($id)->delete();
 
         return redirect('/spielfeld');
     }

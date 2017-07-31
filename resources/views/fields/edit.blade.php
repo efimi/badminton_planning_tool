@@ -11,9 +11,9 @@
             ?>
 
             @foreach($Fdata as $data)
-                <input type="hidden" value="{{ $Fdata['id'] }}" name="id">
+                <input type="hidden" value="{{ $data['id'] }}" name="id">
             @endforeach
-            <input type="text" placeholder="{{ $Fdata['fieldname'] }}" class="form-control" id="fieldname" name="fieldname">
+            <input type="text" placeholder="{{ $data['fieldname'] }}" class="form-control" id="fieldname" name="fieldname">
             {{-- <small class="form-text text-muted">Tragen sie hier den Namen des Spielfeldes ein.</small> --}}
         </div>
 
