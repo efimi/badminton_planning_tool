@@ -15,11 +15,11 @@
         <tbody>
         @foreach($Gdata as $data)
             <tr>
-                <td> {{ $data->Firstname }} </td>
-                <td> {{ $data->Secondname }} </td>
+                <td>{{ substr($data->firstPlayerFirst, 0, 3) }}.  {{ $data->Firstname }} </td>
+                <td>{{ substr($data->secondPlayerFirst, 0, 3) }}.  {{ $data->Secondname }} </td>
                 <td> {{ $data->Field }} </td>
-                <td> {{ $data->Date }} </td>
-                <td> {{ $data->Time }} </td>
+                <td> {{ $data->Date}} </td>
+                <td> {{ substr($data->Time, 0, -3)  }} </td>
                 <td> <a href="bearbeiten/{{ $data->id }}">Bearbeiten</a> | <a id="{{ $data->id }}" onClick="
                 document.getElementById('deleted').href='/spiel/löschen/{{ $data->id }}';" href="" data-toggle="modal" data-target="#deleteModal">Löschen</a> </td>
             </tr>

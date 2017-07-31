@@ -19,6 +19,8 @@ class GamesController extends Controller
     {
         $Gdata = \DB::Select('SELECT
                                     g.id AS id,
+                                    p.firstname AS firstPlayerFirst, 
+                                    p2.firstname AS secondPlayerFirst,
                                     p.lastname as Firstname,
                                     p2.lastname as Secondname,
                                     f.fieldname as Field,

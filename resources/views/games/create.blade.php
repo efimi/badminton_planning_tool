@@ -33,9 +33,9 @@
     <div class="form-group">
         <h5><label for="time" class="col-sm-2 control-label">Zeit</label></h5>
         <select class="form-control" id="time" name="time">
-                <option value="09:00:00">09:00:00 - 11:00:00</option>
-                <option value="11:00:00">11:00:00 - 13:00:00</option>
-                <option value="13:00:00">13:00:00 - 15:00:00</option>
+                <option value="09:00:00">09:00 - 11:00</option>
+                <option value="11:00:00">11:00 - 13:00</option>
+                <option value="13:00:00">13:00 - 15:00</option>
         </select>
     </div>
 
