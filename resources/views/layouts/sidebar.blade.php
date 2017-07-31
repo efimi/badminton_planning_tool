@@ -1,5 +1,4 @@
-<div class="center-block">
-    <div class="col-8 col-md-6" id="sidebar">
+
         <ul class="nav flex-colum">
             {{--  nur bei Login anzeigen lassen --}}
             <li class="nav-item">
@@ -21,6 +20,3 @@
                 </div>
               </li>
             </ul>
-
-    </div>
-</div>
