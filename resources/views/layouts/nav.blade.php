@@ -33,5 +33,5 @@
 
   </ul>
 </nav>
-    <h3 class="text-muted"><a href="/" class="nav-link">Badminton Planing Tool</a></h3>
+    <h3 class="text-muted hidden-md-down"><a href="/" class="nav-link hidden-md-down">Badminton Planing Tool</a></h3>
 </div>
