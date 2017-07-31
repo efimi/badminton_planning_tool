@@ -73,7 +73,6 @@ class FieldsController extends Controller
     {
         $delete = \DB::Delete('DELETE FROM games WHERE field_id='.$id);
         $delete = Field::find($id);
-        dd($delete);
         $delete ->delete();
 
         return redirect('/spielfeld');
