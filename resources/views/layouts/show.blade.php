@@ -56,7 +56,6 @@
                 <?php $lastTD=true; ?>
                 <td></td>
                 <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
-
             @elseif($game->time =="13:00:00" AND $currentState==2 AND $lastTD=="")
                 <td></td>
                 <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
