@@ -7,7 +7,7 @@
     <div class="form-group">
       <label for="fieldname">Name:</label>
       <input type="text" class="form-control" id="fieldname" name="fieldname">
-      {{-- <small class="form-text text-muted">Tragen sie hier den Namen des Spielfeldes ein.</small> --}}
+      <small class="form-text text-muted">Tragen sie hier den Namen des Spielfeldes ein.</small>
     </div>
 
     <button type="submit" class="btn btn-primary">Spielfeld erstellen</button>
