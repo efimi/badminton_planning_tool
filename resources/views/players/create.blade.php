@@ -8,7 +8,7 @@
       <label for="firstname">Vorname:</label>
       <input type="text" class="form-control" name="firstname" id="firstname" name="firstname" >
       <small class="form-text text-muted">Tragen sie hier den Namen des Spielers ein.</small>
-
+      <br>
       <label for="lastname">Nachname:</label>
       <input type="text" class="form-control" name="lastname" id="lastname" name="lastname" >
       <small class="form-text text-muted">Tragen sie hier den Namen des Spielers ein.</small>
