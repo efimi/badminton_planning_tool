@@ -14,7 +14,7 @@ class FieldsController extends Controller
     //
     public function index()
     {
-        $Fdata = \DB::Select('SELECT * FROM fields');
+        $Fdata = Field::all();
         return view('fields.index', compact('Fdata'));
     }
     public function show()
@@ -30,9 +30,8 @@ class FieldsController extends Controller
       $this->validate(request(),[
           'fieldname' => 'required'
       ]);
-
-        $Fdata = \DB::SELECT('SELECT * FROM fields WHERE fieldname="' . request('fieldname') . '"');
-        if(empty($Fdata)) {
+        $Fdata = Field::where('fieldname','=', request('fieldname'))->get();
+        if(!isset($Fdata[0])) {
             Field::create(request(['fieldname']));
         }else{
             return back()->withErrors([
@@ -47,7 +46,7 @@ class FieldsController extends Controller
     }
     public function edit($id)
     {
-        $Fdata = \DB::Select('SELECT * FROM fields WHERE id="'.$id.'"');
+        $Fdata = Field::where('id','=', $id)->get();
         return view('fields.edit', compact('Fdata'));
     }
 

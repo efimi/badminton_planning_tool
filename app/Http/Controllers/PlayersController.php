@@ -85,7 +85,7 @@ class PlayersController extends Controller
     public function edit($id)
     {
         $Pdata = Player::where('id',$id)->get();
-        //$Pdata = \DB::Select('SELECT * FROM players WHERE id="'.$id.'"');
+
         return view('players.edit', compact('Pdata'));
     }
 
