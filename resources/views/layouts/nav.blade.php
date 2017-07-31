@@ -1,14 +1,15 @@
 
-
-
 <div class="header clearfix">
   <nav>
   <ul class="nav nav-pills float-right">
     <li class="nav-item">
-      <a class="nav-link" href="/">Aktuelle Spielfeldbelegung<span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/">Aktuelle Spielfeldbelegung</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/spieler">Spieler</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/table">Tabellenansicht</a>
     </li>
 
     @if (Auth::guest())
@@ -16,6 +17,7 @@
       <a class="nav-link" href="/login">Login</a>
     </li>
     @else
+
       <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                onclick="event.preventDefault();

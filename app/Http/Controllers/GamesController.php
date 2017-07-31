@@ -221,4 +221,24 @@ class GamesController extends Controller
 
         return redirect('/spiel/anzeigen');
     }
+
+    public function table(){
+
+        $games = \DB::Select('SELECT
+                             p.firstname AS firstPlayerFirst, 
+                             p.lastname AS firstPlayer,
+                             p2.firstname AS secondPlayerFirst,
+                             p2.lastname AS secondPlayer,
+                             f.fieldname AS field,
+                             g.date,
+                             g.time
+
+                            FROM games AS g
+                            JOIN players AS p on g.first_player_id=p.id
+                            JOIN players AS p2 on g.second_player_id=p2.id
+                            JOIN fields AS f on g.field_id=f.id
+                            WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
+
+        return view('layouts.show', compact('games'));
+    }
 }

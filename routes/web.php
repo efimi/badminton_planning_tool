@@ -18,6 +18,7 @@ Route::get('/','GamesController@show');
 Route::get('/spiel/erstellen','GamesController@create');
 Route::get('/spiel/anzeigen','GamesController@index');
 Route::post('/spiel/anzeigen','GamesController@update');
+Route::get('/table','GamesController@table');
 Route::get('/spiel/löschen/{id}','GamesController@delete');
 Route::get('/spiel/bearbeiten/{id}','GamesController@edit');
 Route::post('/spiel','GamesController@store');
@@ -39,6 +40,7 @@ Route::get('/spielfeld/löschen/{id}','FieldsController@delete');
 Route::get('/spielfeld/bearbeiten/{id}', 'FieldsController@edit');
 Route::get('/spielfeld/{field}', 'FieldsController@show');
 Route::post('/spielfeld/{field}', 'FieldsController@update');
+
 
 // für erstellen von neuen Spielfeldern
 

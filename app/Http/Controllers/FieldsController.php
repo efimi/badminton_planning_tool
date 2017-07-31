@@ -31,17 +31,6 @@ class FieldsController extends Controller
           'fieldname' => 'required'
       ]);
 
-      // dd(request('name'));
-      // dd(request(['title','body']));
-      // dd(request()->all());
-
-      // // create a new Field using the request data
-      // $field = new \App\Field;
-      //
-      // $field->fieldname = request('fieldname');
-      // // Save it to the Database
-      // $field->save();
-
         $Fdata = \DB::SELECT('SELECT * FROM fields WHERE fieldname="' . request('fieldname') . '"');
         if(empty($Fdata)) {
             Field::create(request(['fieldname']));
