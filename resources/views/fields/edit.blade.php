@@ -18,8 +18,9 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Spielfeld bearbeiten</button>
-    </form>
 
+    </form>
+    @include('layouts.errors')
     <hr>
 
 @endsection

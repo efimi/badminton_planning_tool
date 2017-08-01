@@ -25,7 +25,7 @@ class PlayersController extends Controller
     public function show($id)
     {
         $player = Player::where('id', $id)->get();
-        // $player = \DB::SELECT('SELECT * from players where id='.$id);
+        /* $player = \DB::SELECT('SELECT * from players where id='.$id);
         $game = \DB::SELECT('SELECT
                                     g.date as Date,
                                     g.time as Time,
@@ -41,7 +41,9 @@ class PlayersController extends Controller
                                  g.first_player_id='.$id.'
                                  OR g.second_player_id='.$id.'
                                  ORDER BY date DESC, time ASC');
-        //$game = Player::where()->
+        */
+    $game = Game::where('first_player_id', $id)->orWhere('second_player_id', $id)
+            ->orderBy('date', 'desc')->orderBy('time', 'asc')->get();
 
 
 

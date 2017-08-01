@@ -4,8 +4,8 @@
     <table class="table">
         @foreach($player as $player)
         <thead>
-            <th>{{$player->firstname}}</th>
-            <th>{{$player->lastname}}</th>
+            <th>{{ $player['firstname'] }}</th>
+            <th>{{ $player['lastname'] }}</th>
         </thead>
         @endforeach
         <tbody>
@@ -18,11 +18,11 @@
             </tr>
         @foreach($game as $game)
             <tr>
-                <td>  {{ $game->Date  }}  </td>
-                <td>  {{ $game->Time  }}  </td>
-                <td>  {{ $game->Field  }}  </td>
-                <td>  {{ $game->Firstname  }}  </td>
-                <td>  {{ $game->Secondname  }}  </td>
+                <td>  {{ $game['date']  }}  </td>
+                <td>  {{ $game['time']  }}  </td>
+                <td>  {{ $game['Field']['fieldname']  }}  </td>
+                <td> {{ substr($game['Player_first']['firstname'],0,3) }}. {{ $game['Player_first']['lastname']  }}  </td>
+                <td> {{ substr($game['Player_second']['firstname'],0,3) }}. {{ $game['Player_second']['lastname']  }}  </td>
             </tr>
         @endforeach
         </tbody>

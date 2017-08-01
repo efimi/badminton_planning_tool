@@ -71,7 +71,7 @@ class FieldsController extends Controller
             'id' => request('id')
         ];
 
-        return view('fields.show', compact('data'));
+        return view('fields.index', compact('data'));
     }
 
     public function delete(Request $request, $id)

@@ -12,9 +12,14 @@ class Game extends Model
         return $this->hasMany(Player::class);
     }
 
-    public function player()
+    public function player_first()
     {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo(Player::class, 'first_player_id');
+    }
+
+    public function player_second()
+    {
+        return $this->belongsTo(Player::class, 'second_player_id');
     }
 
     public function field()
