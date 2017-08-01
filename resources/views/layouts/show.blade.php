@@ -26,7 +26,7 @@
     <option  selected  value="{{ date('Y-m-d') }}">{{ date('Y-m-d') }}</option>
 </select>
 <div class=" col-md-10 col-md-offset-1">
-    <table class="table table-bordered text-center">
+    <table class="table text-center">
         <thead>
         <tr>
             <th class="text-center">Spielfelder</th>
@@ -42,6 +42,7 @@
         $lastTD="";
         if(isset($currentField)){
             echo "</tr>";
+
         }
         $currentField = $game['Field']['fieldname'];
         $currentState=1;

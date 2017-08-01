@@ -5,8 +5,10 @@
     <hr>
 <form method="POST" action="/spiel" >
     {{csrf_field()}}
+
     <div class="form-group">
         <h5><label for="first_player_id" class="col-sm-2 control-label">Spieler 1</label></h5>
+        <small>Die Spieler müssen sich unterscheiden!</small>
         <select class="form-control" id="first_player_id" name="first_player_id">
             @foreach ($Pdata as $player )
                 <option value="{{ $player['id'] }}">{{ $player['firstname'] }} {{ $player['lastname'] }}</option>
@@ -15,12 +17,14 @@
     </div>
     <div class="form-group">
         <h5><label for="second_player_id" class="col-sm-2 control-label">Spieler 2</label></h5>
+        <small>Die Spieler müssen sich unterscheiden!</small>
         <select class="form-control" id="second_player_id" name="second_player_id">
             @foreach ($Pdata as $player )
                 <option value="{{ $player['id'] }}">{{ $player['firstname'] }} {{ $player['lastname'] }}</option>
             @endforeach
         </select>
     </div>
+
     <div class="form-group">
         <h5><label for="field" class="col-sm-2 control-label">Feld</label></h5>
         <select class="form-control" id="field" name="field">
