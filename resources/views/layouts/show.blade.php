@@ -26,7 +26,7 @@
     <option  selected  value="{{ date('Y-m-d') }}">{{ date('Y-m-d') }}</option>
 </select>
 <div class=" col-md-10 col-md-offset-1">
-    <table class="table table-striped table-bordered text-center">
+    <table class="table table-bordered text-center">
         <thead>
         <tr>
             <th class="text-center">Spielfelder</th>
@@ -38,33 +38,38 @@
         <tbody id="matchBody">
 
         <?php foreach ($games as $game){
-        if(!isset($currentField) || $currentField != $game->field ) {
-        $currentField = $game->field;
-        $currentState=1;
+        if(!isset($currentField) || $currentField != $game['Field']['fieldname'] ) {
         $lastTD="";
         if(isset($currentField)){
             echo "</tr>";
         }
+        $currentField = $game['Field']['fieldname'];
+        $currentState=1;
         ?>
         <tr>
-            <td>{{ $game->field }}</td>
+            <td>{{ $game['Field']['fieldname'] }}</td>
 
             <?php } ?>
-            @if($game->time =="09:00:00")
-                <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
-            @elseif($game->time =="11:00:00" AND $currentState==1)
+            @if($game['time'] =="09:00:00")
+                <td>{{ substr($game['Player_first']['firstname'], 0, 3) }}. {{ $game['Player_first']['lastname'] }}
+                <br>{{ substr($game['Player_second']['firstname'], 0, 3) }}. {{  $game['Player_second']['lastname'] }}</td>
+            @elseif($game['time'] =="11:00:00" AND $currentState==1)
                 <?php $lastTD=true; ?>
                 <td></td>
-                <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
-            @elseif($game->time =="13:00:00" AND $currentState==2 AND $lastTD=="")
+                <td>{{ substr($game['Player_first']['firstname'], 0, 3) }}. {{ $game['Player_first']['lastname'] }}
+                <br>{{ substr($game['Player_second']['firstname'], 0, 3) }}. {{  $game['Player_second']['lastname'] }}</td>
+            @elseif($game['time'] =="13:00:00" AND $currentState==2 AND $lastTD=="")
                 <td></td>
-                <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{  $game->secondPlayer }}</td>
-            @elseif($game->time =="13:00:00" AND $currentState==1)
+                <td>{{ substr($game['Player_first']['firstname'], 0, 3) }}. {{ $game['Player_first']['lastname'] }}
+                <br>{{ substr($game['Player_second']['firstname'], 0, 3) }}. {{  $game['Player_second']['lastname'] }}</td>
+            @elseif($game['time'] =="13:00:00" AND $currentState==1)
                 <td></td>
                 <td></td>
-                <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{ $game->secondPlayer }}</td>
+                <td>{{ substr($game['Player_first']['firstname'], 0, 3) }}. {{ $game['Player_first']['lastname'] }}
+                <br>{{ substr($game['Player_second']['firstname'], 0, 3) }}. {{ $game['Player_second']['lastname'] }}</td>
             @else
-                <td>{{ substr($game->firstPlayerFirst, 0, 3) }}. {{ $game->firstPlayer }}<br>{{ substr($game->secondPlayerFirst, 0, 3) }}. {{ $game->secondPlayer }}</td>
+                <td>{{ substr($game['Player_first']['firstname'], 0, 3) }}. {{ $game['Player_first']['lastname'] }}
+                <br>{{ substr($game['Player_second']['firstname'], 0, 3) }}. {{ $game['Player_second']['lastname'] }}</td>
         @endif
         <?php
         $currentState++;

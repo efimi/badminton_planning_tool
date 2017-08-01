@@ -164,7 +164,7 @@ class GamesController extends Controller
 
     public function table(){
 
-        $games = Game::orderBy('date', 'desc')->orderBy('time', 'asc')->get();
+        $games = Game::where('date','=', date('Y-m-d'))->orderBy('date', 'desc')->orderBy('time', 'asc')->get();
         return view('layouts.show', compact('games'));
     }
 }
