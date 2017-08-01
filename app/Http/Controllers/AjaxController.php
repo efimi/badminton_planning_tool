@@ -3,32 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Game;
 
 class AjaxController extends Controller
 {
     public function index($date){
-
-        $games = \DB::Select('SELECT
-                             p.firstname AS firstPlayerFirst, 
-                             p.lastname AS firstPlayer,
-                             p2.firstname AS secondPlayerFirst,
-                             p2.lastname AS secondPlayer,
-                             f.fieldname AS field,
-                             g.date,
-                             g.time
-
-                            FROM games AS g
-                            JOIN players AS p on g.first_player_id=p.id
-                            JOIN players AS p2 on g.second_player_id=p2.id
-                            JOIN fields AS f on g.field_id=f.id
-                            WHERE date="'.$date.'" order by field_id ASC, time ASC');
-
-
+        $games = Game::where('date','=', $date)->orderBy('field_id', 'asc')->orderBy('time', 'asc')->get();
 $msg="";
 
 foreach ($games as $game) {
-    if (!isset($currentField) || $currentField != $game->field) {
-        $currentField = $game->field;
+    if (!isset($currentField) || $currentField != $game['Field']['fieldname']) {
+        $currentField = $game['Field']['fieldname'];
         $currentState = 1;
         $lastTD="";
         if (isset($currentField)) {
@@ -36,28 +21,29 @@ foreach ($games as $game) {
         }
         $msg .= '
 <tr>
-    <td>' . $game->field . '</td>';
+    <td>' . $game['Field']['fieldname'] . '</td>';
     }
     if ($game->time == "09:00:00") {
-        $msg .='<td>'.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer.' 
-        <br > '.substr($game->secondPlayerFirst, 0, 3).'. '.$game->secondPlayer.' </td >';
+        $msg .='<td>'.substr($game['Player_first']['firstname'], 0, 3).'. '.$game['Player_first']['lastname'].' 
+        <br > '.substr($game['Player_second']['firstname'], 0, 3).'. '.$game['Player_second']['lastname'].' </td >';
     } elseif ($game->time == "11:00:00" AND $currentState == 1) {
         $lastTD = true;
         $msg .= '<td ></td >
-        <td > ' . substr($game->firstPlayerFirst, 0, 3) . '. ' . $game->firstPlayer . ' 
-        <br > ' . substr($game->secondPlayerFirst, 0, 3) . '. ' . $game->secondPlayer . ' </td >';
+        <td > ' . substr($game['Player_first']['firstname'], 0, 3) . '. ' . $game['Player_first']['lastname'] . ' 
+        <br > ' . substr($game['Player_second']['firstname'], 0, 3) . '. ' . $game['Player_second']['lastname'] . ' </td >';
     }elseif($game->time == "13:00:00" AND $currentState == 2 AND $lastTD=="") {
         $msg.='
         <td></td>
-        <td>'. substr($game->firstPlayerFirst, 0, 3) .'.'.  $game->firstPlayer .'<br>'. substr($game->secondPlayerFirst, 0, 3) .'.'.  $game->secondPlayer .'</td>';
+        <td>'. substr($game['Player_first']['firstname'], 0, 3) .'.'.  $game['Player_first']['lastname'] .'
+        <br>'. substr($game['Player_second']['firstname'], 0, 3) .'.'.  $game['Player_second']['lastname'] .'</td>';
     }elseif($game->time =="13:00:00" AND $currentState==1) {
         $msg .='<td ></td >
         <td ></td >
-        <td >'.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer .'
-        <br >'.substr($game->secondPlayerFirst, 0, 3).'. '. $game->secondPlayer.' </td >';
+        <td >'.substr($game['Player_first']['firstname'], 0, 3).'. '.$game['Player_first']['lastname'] .'
+        <br >'.substr($game['Player_second']['firstname'], 0, 3).'. '. $game['Player_second']['lastname'].' </td >';
     }else{
-        $msg .= '<td > '.substr($game->firstPlayerFirst, 0, 3).'. '.$game->firstPlayer .'
-        <br >'.substr($game->secondPlayerFirst, 0, 3).'. '. $game->secondPlayer.' </td >';
+        $msg .= '<td > '.substr($game['Player_first']['firstname'], 0, 3).'. '.$game['Player_first']['lastname'] .'
+        <br >'.substr($game['Player_second']['firstname'], 0, 3).'. '. $game['Player_second']['lastname'].' </td >';
     }
         $currentState++;
     }

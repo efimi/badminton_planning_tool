@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Game;
+use App\Player;
+use App\Field;
 
 
 class GamesController extends Controller
@@ -17,52 +19,25 @@ class GamesController extends Controller
 
     public function index()
     {
-        $Gdata = \DB::Select('SELECT
-                                    g.id AS id,
-                                    p.firstname AS firstPlayerFirst, 
-                                    p2.firstname AS secondPlayerFirst,
-                                    p.lastname as Firstname,
-                                    p2.lastname as Secondname,
-                                    f.fieldname as Field,
-                                    g.date as Date,
-                                    g.time as Time
-                                FROM
-                                    games AS g
-                                    JOIN players AS p ON p.id=g.first_player_id
-                                    JOIN players AS p2 ON p2.id=g.second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id
-                                    order by date DESC, time ASC
-                                    ');
+      $Gdata = Game::orderBy('date', 'desc')->orderBy('time', 'asc')->get();
       return view('games.index', compact('Gdata'));
 
     }
     public function show()
     {
 
-      $games = \DB::Select('SELECT
-                             p.firstname AS firstPlayerFirst, 
-                             p.lastname AS firstPlayer,
-                             p2.firstname AS secondPlayerFirst,
-                             p2.lastname AS secondPlayer,
-                             f.fieldname AS field,
-                             g.date,
-                             g.time
+      $games = Game::where('date','=', date('Y-m-d'))->orderBy('field_id', 'asc')->orderBy('time', 'asc')->get();
+      // database.php: Line 53 -> befor strict=true after strict=false ;
+      $dates = Game::groupBy('date')->orderBy('date', 'desc')->get();
 
-                            FROM games AS g
-                            JOIN players AS p on g.first_player_id=p.id
-                            JOIN players AS p2 on g.second_player_id=p2.id
-                            JOIN fields AS f on g.field_id=f.id
-                            WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
-
-      $dates = \DB::Select('SELECT date FROM games GROUP BY date ORDER BY date DESC');
       return view('games.show', compact('games', 'dates'));
     }
 
 
     public function create()
     {
-        $Pdata = \DB::Select('SELECT * FROM players');
-        $Fdata = \DB::Select('SELECT * FROM fields');
+        $Pdata = Player::all();
+        $Fdata = Field::all();
       return view('games.create', compact('Pdata', 'Fdata'));
     }
     public function store()
@@ -80,28 +55,20 @@ class GamesController extends Controller
         $game = new \App\Game;
 
         if(request('first_player_id' ) != request('second_player_id')) {
-            $time = \DB::Select('SELECT time FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '" AND field_id ="'.request('field') .'"');
-            $doubleCheck = \DB::Select('SELECT
-                                          *
-                                        FROM
-                                          games
-                                        WHERE
-                                          time="' . request('time') . '"
-                                        AND
-                                          (
-                                            first_player_id="' . request('first_player_id') . '"
-                                          OR
-                                            first_player_id="' . request('second_player_id') . '"
-                                          )
-                                        AND
-                                          (
-                                            second_player_id="' . request('first_player_id') . '"
-                                          OR
-                                            second_player_id="' . request('second_player_id') . '"
-                                          )
-                                          AND id != "'. request('id') .'"
-                                          ');
-            if (empty($time) AND empty($doubleCheck)) {
+            $time = Game::where('date', '=', request('date'))
+                ->where('time','=', request('time'))
+                ->where('field_id', '=', request('field'))
+                ->get();
+            $doubleCheck = Game::where('time', '=', request('time'))
+                            ->where(function($query){
+                                $query->where('first_player_id','=', request('first_player_id'))
+                                        ->orWhere('first_player_id','=', request('second_player_id'));
+                            })->where(function($query){
+                                $query->where('second_player_id','=', request('first_player_id'))
+                                        ->where('second_player_id','=', request('second_player_id'));
+                            })->where('id', '!=', request('id'))->get();
+
+            if (!isset($time[0]) AND !isset($doubleCheck[0])) {
                 $game->first_player_id = request('first_player_id');
                 $game->second_player_id = request('second_player_id');
                 $game->field_id = request('field');
@@ -110,7 +77,7 @@ class GamesController extends Controller
                 // Save it to the Database
                 $game->save();
             }else{
-                if(!empty($doubleCheck)){
+                if(isset($doubleCheck[0])){
                     return back()->withErrors([
                         'massage' => 'Einer der Spieler hat bereits ein angesetztes Spiel zu dieser Zeit'
                     ]);
@@ -133,11 +100,9 @@ class GamesController extends Controller
     }
     public function edit($id)
     {
-
-        $Pdata = \DB::Select('SELECT * FROM players');
-        $Fdata = \DB::Select('SELECT * FROM fields');
-        $Gdata = \DB::Select('SELECT * FROM games WHERE id="'.$id.'"');
-
+        $Pdata = Player::all();
+        $Fdata = Field::all();
+        $Gdata = Game::find($id)->get();
         return view('games.edit', compact('Pdata', 'Gdata', 'Fdata'));
     }
 
@@ -145,39 +110,30 @@ class GamesController extends Controller
     {
             if(request('first_player_id' ) != request('second_player_id')) {
 
-                $time = \DB::Select('SELECT id FROM games WHERE date="' . request('date') . '" AND time="' . request('time') . '"AND id != "'. request('id').'"');
-                $doubleCheck = \DB::Select('SELECT
-                                          *
-                                        FROM
-                                          games
-                                        WHERE
-                                          time="' . request('time') . '"
-                                        AND
-                                          (
-                                            first_player_id="' . request('first_player_id') . '"
-                                          OR
-                                            first_player_id="' . request('second_player_id') . '"
-                                          )
-                                        AND
-                                          (
-                                            second_player_id="' . request('first_player_id') . '"
-                                          OR
-                                            second_player_id="' . request('second_player_id') . '"
-                                          )
-                                          AND id != "'. request('id') .'"
-                                          ');
-                if (empty($time) AND empty($doubleCheck)) {
-                    $up_Data = \DB::Update('UPDATE games
-                                            SET first_player_id="' . request('first_player_id') . '",
-                                                second_player_id="' . request('second_player_id') . '",
-                                                field_id="' . request('field') . '",
-                                                time="' . request('time') . '",
-                                                date="'.request('date').'"
-                                            WHERE
-                                                id="' . request('id') . '"');
+                $time = Game::where('date', '=', request('date'))
+                    ->where('time','=', request('time'))
+                    ->where('field_id', '=', request('field'))
+                    ->get();
+                $doubleCheck = Game::where('time', '=', request('time'))
+                    ->where(function($query){
+                        $query->where('first_player_id','=', request('first_player_id'))
+                            ->orWhere('first_player_id','=', request('second_player_id'));
+                    })->where(function($query){
+                        $query->where('second_player_id','=', request('first_player_id'))
+                            ->where('second_player_id','=', request('second_player_id'));
+                    })->where('id', '!=', request('id'))->get();
 
+                if (!isset($time[0]) AND !isset($doubleCheck[0])) {
+                    $up_Data = Game::where('id','=', request('id'))
+                                ->update([
+                                    'first_player_id' => request('first_player_id'),
+                                    'second_player_id' =>  request('second_player_id'),
+                                    'field_id' => request('field'),
+                                    'time' => request('time'),
+                                    'date' => request('date')
+                                ]);
                 }else{
-                    if(!empty($doubleCheck)){
+                    if(isset($doubleCheck[0])){
                         return back()->withErrors([
                             'massage' => 'Einer der Spieler hat bereits ein angesetztes Spiel zu dieser Zeit'
                         ]);
@@ -193,23 +149,7 @@ class GamesController extends Controller
                 ]);
             }
 
-
-        $Gdata = \DB::Select('SELECT
-                                    g.id AS id,
-                                    p.firstname AS firstPlayerFirst, 
-                                    p2.firstname AS secondPlayerFirst,
-                                    p.lastname as Firstname,
-                                    p2.lastname as Secondname,
-                                    f.fieldname as Field,
-                                    g.date as Date,
-                                    g.time as Time
-                                FROM
-                                    games AS g
-                                    JOIN players AS p ON p.id=g.first_player_id
-                                    JOIN players AS p2 ON p2.id=g.second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id
-                                    order by date DESC, time ASC
-                                    ');
+        $Gdata = Game::orderBy('date', 'desc')->orderBy('time', 'asc')->get();
         return view('games.index', compact('Gdata'));
     }
 
@@ -224,21 +164,7 @@ class GamesController extends Controller
 
     public function table(){
 
-        $games = \DB::Select('SELECT
-                             p.firstname AS firstPlayerFirst, 
-                             p.lastname AS firstPlayer,
-                             p2.firstname AS secondPlayerFirst,
-                             p2.lastname AS secondPlayer,
-                             f.fieldname AS field,
-                             g.date,
-                             g.time
-
-                            FROM games AS g
-                            JOIN players AS p on g.first_player_id=p.id
-                            JOIN players AS p2 on g.second_player_id=p2.id
-                            JOIN fields AS f on g.field_id=f.id
-                            WHERE date=CURRENT_DATE order by field_id ASC, time ASC');
-
+        $games = Game::orderBy('date', 'desc')->orderBy('time', 'asc')->get();
         return view('layouts.show', compact('games'));
     }
 }

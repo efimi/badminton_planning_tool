@@ -15,13 +15,13 @@
         <tbody>
         @foreach($Gdata as $data)
             <tr>
-                <td>{{ substr($data->firstPlayerFirst, 0, 3) }}.  {{ $data->Firstname }} </td>
-                <td>{{ substr($data->secondPlayerFirst, 0, 3) }}.  {{ $data->Secondname }} </td>
-                <td> {{ $data->Field }} </td>
-                <td> {{ $data->Date}} </td>
-                <td> {{ substr($data->Time, 0, -3)  }} </td>
-                <td> <a href="bearbeiten/{{ $data->id }}">Bearbeiten</a> | <a id="{{ $data->id }}" onClick="
-                document.getElementById('deleted').href='/spiel/löschen/{{ $data->id }}';" href="" data-toggle="modal" data-target="#deleteModal">Löschen</a> </td>
+                <td>{{ substr($data['Player_first']['firstname'], 0, 3) }}.  {{ $data['Player_first']['lastname'] }} </td>
+                <td>{{ substr($data['Player_second']['firstname'], 0, 3) }}.  {{ $data['Player_second']['lastname'] }} </td>
+                <td> {{ $data['Field']['fieldname'] }} </td>
+                <td> {{ $data['date']}} </td>
+                <td> {{ substr($data['time'], 0, -3)  }} </td>
+                <td> <a href="bearbeiten/{{ $data['id'] }}">Bearbeiten</a> | <a id="{{ $data['id'] }}" onClick="
+                document.getElementById('deleted').href='/spiel/löschen/{{ $data['id'] }}';" href="" data-toggle="modal" data-target="#deleteModal">Löschen</a> </td>
             </tr>
         @endforeach
         </tbody>

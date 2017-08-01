@@ -4,11 +4,12 @@
 
     <?php
     foreach ($Gdata as $data )
-        $G_id = $data->id;
-        $G_first_id = $data->first_player_id;
-        $G_second_id = $data->second_player_id;
-        $G_time = $data->time;
-        $G_date = $data->date;
+        $G_id = $data['id'];
+        $G_first_id = $data['first_player_id'];
+        $G_second_id = $data['second_player_id'];
+        $G_time = $data['time'];
+        $G_date = $data['date'];
+        $G_field = $data['field_id']
     ?>
 
     <form method="POST" action="/spiel/anzeigen" >
@@ -19,7 +20,7 @@
             <h5><label for="first_player_id" class="col-sm-2 control-label">Spieler 1</label></h5>
             <select class="form-control" id="first_player_id" name="first_player_id">
                 @foreach ($Pdata as $player )
-                    <option value="{{ $player->id }}" @if($player->id == $G_first_id) selected @endif >{{ $player->firstname }} {{ $player->lastname }}</option>
+                    <option value="{{ $player['id'] }}" @if($player['id'] == $G_first_id) selected @endif >{{ $player['firstname'] }} {{ $player['lastname'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -27,7 +28,7 @@
             <h5><label for="second_player_id" class="col-sm-2 control-label">Spieler 2</label></h5>
             <select class="form-control" id="second_player_id" name="second_player_id">
                 @foreach ($Pdata as $player )
-                    <option value="{{ $player->id }}" @if($player->id == $G_second_id) selected @endif >{{ $player->firstname }} {{ $player->lastname }}</option>
+                    <option value="{{ $player['id'] }}" @if($player['id'] == $G_second_id) selected @endif >{{ $player['firstname'] }} {{ $player['lastname'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -35,7 +36,7 @@
             <h5><label for="field" class="col-sm-2 control-label">Feld</label></h5>
             <select class="form-control" id="field" name="field">
                 @foreach ($Fdata as $field )
-                    <option value="{{ $field->id }}">{{ $field->fieldname }}</option>
+                    <option value="{{ $field['id'] }}" @if($field['id'] == $G_field) selected @endif>{{ $field['fieldname'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -56,6 +57,7 @@
         <input type="reset" class="btn btn-default">
         <button type="submit" class="btn btn-default">Speichern</button>
 
+        @include('layouts.errors')
     </form>
     <br>
 

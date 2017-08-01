@@ -25,23 +25,7 @@ class PlayersController extends Controller
     public function show($id)
     {
         $player = Player::where('id', $id)->get();
-        /* $player = \DB::SELECT('SELECT * from players where id='.$id);
-        $game = \DB::SELECT('SELECT
-                                    g.date as Date,
-                                    g.time as Time,
-                                    p.lastname as Firstname,
-                                    p2.lastname as Secondname,
-                                    f.fieldname as Field
-                                from
-                                    games AS g
-                                    JOIN players AS p ON p.id=g.first_player_id
-                                    JOIN players AS p2 ON p2.id=g.second_player_id
-                                    JOIN fields AS f ON f.id=g.field_id
-                                where
-                                 g.first_player_id='.$id.'
-                                 OR g.second_player_id='.$id.'
-                                 ORDER BY date DESC, time ASC');
-        */
+
     $game = Game::where('first_player_id', $id)->orWhere('second_player_id', $id)
             ->orderBy('date', 'desc')->orderBy('time', 'asc')->get();
 
@@ -95,7 +79,6 @@ class PlayersController extends Controller
     {
         if (request('firstname') != "" AND request('lastname') != ""){
             $Pdata = Player::where('firstname','=', request('firstname'))->where('lastname', '=', request('lastname'))->get();
-            //dd($Pdata[0]);
                 if(!isset($Pdata[0])){
                     $Pdata = Player::where('id', request('id'))->update(['firstname'=> request('firstname')]);
                     $Pdata = Player::where('id', request('id'))->update(['lastname'=> request('lastname')]);
